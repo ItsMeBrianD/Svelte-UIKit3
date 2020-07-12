@@ -13,11 +13,18 @@ const colors = {
     Default: "default", Primary: "primary", Secondary: "secondary", Danger: "danger", Text: "text", Link: "link"
 };
 
+const sizes = {
+    Small: "small",
+    Default: "",
+    Large: "large"
+};
+
 export const Main = () => ({
     Component: Button,
     props: {
         text: text("text", "Button Text"),
-        style: select("Style", colors, "default")
+        style: select("Style", colors, "default"),
+        size: select("Size", sizes, "")
     },
     on: {click: action('clicked')},
 });

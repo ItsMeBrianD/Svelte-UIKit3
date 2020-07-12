@@ -11,6 +11,12 @@
         classes.push("uk-button-default");
     }
 
+    export let size = "";
+    const sizes = ["small", "large"];
+    if (sizes.includes(size.toLowerCase())) {
+        classes.push("uk-button-" + size);
+    }
+
 </script>
 
 
