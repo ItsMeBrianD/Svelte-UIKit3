@@ -1,6 +1,8 @@
 {
-  "name": "svelte-app",
-  "version": "1.0.0",
+  "name": "svelte-uikit",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -8,6 +10,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@rollup/plugin-commonjs": "^12.0.0",
@@ -22,11 +27,10 @@
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "svelte": "^3.24.0",
-    "svelte-loader": "^2.13.6"
-  },
-  "dependencies": {
+    "svelte-loader": "^2.13.6",
     "@storybook/addon-knobs": "^5.3.19",
     "sirv-cli": "^0.4.4",
     "uikit": "^3.5.4"
-  }
+  },
+  "dependencies": {}
 }

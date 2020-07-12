@@ -1,6 +1,5 @@
 <script>
-    import ButtonGroup from "../../src/Button/ButtonGroup.svelte";
-    import Button from "../../src/Button/Button.svelte";
+    import {ButtonGroup} from "../../";
     export let button1 = {};
     export let button2 = {};
     export let button3 = {};

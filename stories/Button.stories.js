@@ -1,6 +1,6 @@
 import {action} from '@storybook/addon-actions';
 
-import Button from '../src/Button/Button.svelte';
+import {Button} from '..';
 import ButtonGroupView from "./views/ButtonGroupView.svelte";
 import {withKnobs, text, boolean, number, select} from "@storybook/addon-knobs";
 
