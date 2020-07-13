@@ -1,5 +1,6 @@
 <script>
-    import {ButtonGroup} from "../../";
+    import {ButtonGroup} from "../../src";
+    import {Button} from "../../src"
     export let button1 = {};
     export let button2 = {};
     export let button3 = {};
