@@ -1,5 +1,6 @@
 <script>
     import uikit from 'uikit';
+    import {getWidthClass} from "../helpers/width";
     let element, closeElem, options = {}, classes = [];
 
     export let showClose = false;
@@ -18,6 +19,10 @@
     $: if (closeElem) {
         uikit.close(closeElem);
     }
+
+    export let width = "";
+    classes.push(getWidthClass(width));
+
 </script>
 <div>
     <div bind:this={element} class={classes.join(" ")} on:hide on:beforehide>

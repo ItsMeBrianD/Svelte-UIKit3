@@ -1,5 +1,6 @@
 import AccordionView from "./views/Accordion/AccordionView.svelte"
 import {boolean, number, select, text, withKnobs} from "@storybook/addon-knobs";
+import {validWidths} from "../src/helpers/width";
 
 export default {
     title: 'Accordion',
@@ -16,7 +17,8 @@ export const Main = () => ({
             collapsible : boolean("Collapsible", true),
             duration : number("Duration", 200),
             multiple : boolean("Multiple", false),
-            offset : number("Offset", 0)
+            offset : number("Offset", 0),
+            width: select("Width", ["", ...validWidths], "")
         }
     }
 });
