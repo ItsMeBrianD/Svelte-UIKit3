@@ -1,5 +1,5 @@
 <script>
-    import {Dropdown, Button} from "../../src";
+    import {Dropdown, Button} from "../../../src";
     export let text;
     export let style;
     export let size;

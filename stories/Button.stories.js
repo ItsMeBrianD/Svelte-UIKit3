@@ -1,8 +1,8 @@
 import {action} from '@storybook/addon-actions';
 
 import {Button} from '../src';
-import ButtonGroupView from "./views/ButtonGroupView.svelte";
-import ButtonDropdownView from "./views/ButtonDropdownView.svelte";
+import ButtonGroupView from "./views/Button/ButtonGroupView.svelte";
+import ButtonDropdownView from "./views/Button/ButtonDropdownView.svelte";
 import {withKnobs, text, boolean, number, select} from "@storybook/addon-knobs";
 import {validWidths} from "../src/helpers/width";
 
