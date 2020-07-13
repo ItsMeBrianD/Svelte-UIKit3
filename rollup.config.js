@@ -2,6 +2,7 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import {terser} from 'rollup-plugin-terser';
 import pkg from './package.json';
+import commonjs from "@rollup/plugin-commonjs";
 
 const name = pkg.name
 	.replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
@@ -17,6 +18,9 @@ export default {
 	],
 	plugins: [
 		svelte(),
+		commonjs({
+			include: "node_modules/**"
+		}),
 		resolve()
 	]
 };

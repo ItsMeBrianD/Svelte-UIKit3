@@ -1,5 +1,5 @@
 <script>
-    import {Button} from ".."
+    import Button from "../Button/Button.svelte"
     import uikit from 'uikit';
 
     let options = {};
