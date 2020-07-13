@@ -1,7 +1,5 @@
 import AccordionView from "./views/Accordion/AccordionView.svelte"
 import {boolean, number, select, text, withKnobs} from "@storybook/addon-knobs";
-import {validWidths} from "../src/helpers/width";
-import {action} from "@storybook/addon-actions";
 
 export default {
     title: 'Accordion',
