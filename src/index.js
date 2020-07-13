@@ -3,6 +3,8 @@ export {default as AccordionItem} from "./Accordion/AccordionItem.svelte";
 
 export {default as Alert} from "./Alert/Alert.svelte";
 
+export {default as Article} from "./Article/Article.svelte";
+
 export {default as Button} from "./Button/Button.svelte";
 export {default as ButtonGroup} from "./Button/ButtonGroup.svelte";
 
