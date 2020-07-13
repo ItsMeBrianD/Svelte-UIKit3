@@ -8,9 +8,13 @@
     "dev": "rollup -c -w",
     "start": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages --out docs --dry-run"
   },
-  "pre-commit": ["build"],
+  "pre-push": [
+    "build",
+    "deploy-storybook"
+  ],
   "files": [
     "dist"
   ],
@@ -22,6 +26,7 @@
     "@storybook/addon-knobs": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addons": "^5.3.19",
+    "@storybook/storybook-deployer": "^2.8.6",
     "@storybook/svelte": "^5.3.19",
     "babel-loader": "^8.1.0",
     "pre-commit": "^1.2.2",
