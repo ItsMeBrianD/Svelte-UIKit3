@@ -9,12 +9,9 @@
     "start": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages --out docs --dry-run"
+    "deploy-storybook": "storybook-to-ghpages --out docs --dry-run",
+    "commit-docs-dist": "git stage dist docs && git diff --name-only --cached | grep . && git commit -m \"🤖Update dist and docs🤖\""
   },
-  "pre-push": [
-    "build",
-    "deploy-storybook"
-  ],
   "files": [
     "dist"
   ],
@@ -29,7 +26,6 @@
     "@storybook/storybook-deployer": "^2.8.6",
     "@storybook/svelte": "^5.3.19",
     "babel-loader": "^8.1.0",
-    "pre-commit": "^1.2.2",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
