@@ -21,10 +21,12 @@
     }
 
     export let width = "";
+    let _class;
+    export {_class as class}
 
 </script>
 <div use:uk_width={width}>
-    <div bind:this={element} class={classes.join(" ")} on:hide on:beforehide>
+    <div bind:this={element} class={classes.join(" ") + " " + _class} on:hide on:beforehide>
         {#if showClose}
             <button class="uk-alert-close" bind:this={closeElem} class:uk-close-large={largeClose}></button>{/if}
         <h3>

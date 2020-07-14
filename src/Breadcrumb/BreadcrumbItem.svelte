@@ -3,9 +3,11 @@
     export let disabled = false;
     export let isLink = true;
     export let text = "";
+    let _class;
+    export {_class as class}
 </script>
 
-<li>
+<li class={_class}>
     {#if isLink}
         <a {href} class:uk-disabled={disabled}>
             <slot>

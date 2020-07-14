@@ -26,10 +26,13 @@
 
     let headerElement = false;
     let footerElement = false;
+
+    let _class;
+    export {_class as class}
 </script>
 
 <div use:uk_width={width}>
-    <div class={classes.join(" ")}>
+    <div class={classes.join(" ") + " " + _class}>
         <div class:uk-card-header={!headerElement} class:uk-hidden={headerElement}
              class="uk-margin-small-bottom uk-padding-remove-horizontal">
             <slot name="header">
