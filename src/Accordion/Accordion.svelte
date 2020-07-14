@@ -9,7 +9,7 @@
     export let offset = 0;
     let options, classes = [];
     $: options = {
-        animate,
+        animation: animate,
         collapsible,
         duration,
         multiple,
@@ -23,7 +23,7 @@
     let element;
     $: if(element){
         console.log(options);
-        uikit.accordion(element, options);
+        console.log(uikit.accordion(element, options));
     }
     let _class;
     export {_class as class}
