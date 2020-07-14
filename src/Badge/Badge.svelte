@@ -3,8 +3,8 @@
     export let card = false;
 </script>
 
-<span class="uk-badge" class:uk-badge-card={card}>
+<div class="uk-badge" class:uk-card-badge={card}>
     <slot>
         {text}
     </slot>
-</span>
+</div>
