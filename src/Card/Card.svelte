@@ -1,6 +1,6 @@
 <script>
-    import {Badge} from "..";
-    import {getWidthClass} from "../helpers/width";
+    import {Badge, uk_width} from "..";
+
 
     export let title = "";
     export let titleIsHeader = false;
@@ -22,14 +22,13 @@
     export let badge = false;
 
     export let width = "";
-    classes.push(getWidthClass(width));
 
 
     let headerElement = false;
     let footerElement = false;
 </script>
 
-<div>
+<div use:uk_width={width}>
     <div class={classes.join(" ")}>
         <div class:uk-card-header={!headerElement} class:uk-hidden={headerElement}
              class="uk-margin-small-bottom uk-padding-remove-horizontal">

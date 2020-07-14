@@ -15,6 +15,10 @@ export {default as ButtonGroup} from "./Button/ButtonGroup.svelte";
 
 export {default as Card} from "./Card/Card.svelte";
 
+export {default as Column} from "./Column/Column.svelte";
+
 export {default as Dropdown} from "./Dropdown/Dropdown.svelte";
 
 export {default as Inline} from "./Utility/Inline.svelte";
+
+export {uk_width} from "./helpers/width";

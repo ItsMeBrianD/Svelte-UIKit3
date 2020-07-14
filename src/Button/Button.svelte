@@ -1,5 +1,5 @@
 <script>
-    import {getWidthClass} from "../helpers/width";
+    import {uk_width} from "..";
 
     export let text;
     let classes = ["uk-button"];
@@ -20,7 +20,6 @@
     }
 
     export let width = "";
-    classes.push(getWidthClass(width));
 
     let _class;
     export {_class as class};
@@ -28,7 +27,7 @@
 
 
 <button class={classes.join(" ") + " " + _class} on:focus on:blur on:focusin on:focusout on:click on:dblclick on:mouseenter
-        on:mouseleave on:auxclick>
+        on:mouseleave on:auxclick use:uk_width={width}>
     <slot>
         {text}
     </slot>

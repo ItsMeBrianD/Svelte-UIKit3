@@ -20,7 +20,7 @@ export const validWidths = [
     "expand"
 ];
 
-export const getWidthClass = (width) => {
+const getWidthClass = (width) => {
     if(typeof width === "undefined" || !width || width === "") return;
     if(validWidths.includes(width.toLowerCase())){
         return "uk-width-" + width.toLowerCase();
@@ -29,3 +29,15 @@ export const getWidthClass = (width) => {
         return "";
     }
 };
+
+export const uk_width = (node, width) => {
+    node.classList.add(getWidthClass(width));
+    let oldWidth = width;
+    return {
+        update(width) {
+            node.classList.remove(getWidthClass(oldWidth));
+            node.classList.add(getWidthClass(width));
+            oldWidth = width;
+        }
+    }
+}

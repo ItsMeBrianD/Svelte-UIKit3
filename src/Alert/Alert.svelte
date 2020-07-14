@@ -1,6 +1,6 @@
 <script>
     import uikit from 'uikit';
-    import {getWidthClass} from "../helpers/width";
+    import {uk_width} from "..";
     let element, closeElem, options = {}, classes = [];
 
     export let showClose = false;
@@ -21,10 +21,9 @@
     }
 
     export let width = "";
-    classes.push(getWidthClass(width));
 
 </script>
-<div>
+<div use:uk_width={width}>
     <div bind:this={element} class={classes.join(" ")} on:hide on:beforehide>
         {#if showClose}
             <button class="uk-alert-close" bind:this={closeElem} class:uk-close-large={largeClose}></button>{/if}

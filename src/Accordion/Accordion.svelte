@@ -1,6 +1,6 @@
 <script>
     import uikit from 'uikit';
-    import {getWidthClass} from "../helpers/width";
+    import {uk_width} from "..";
 
     export let animate = true;
     export let collapsible = true;
@@ -17,7 +17,6 @@
     };
 
     export let width = "";
-    classes.push(getWidthClass(width));
 
 
     let element;
@@ -29,7 +28,7 @@
 </script>
 
 
-<ul bind:this={element} class={_class + " " + classes.join(" ")} on:beforeshow on:show on:shown on:beforehide on:hide on:hidden>
+<ul bind:this={element} class={_class + " " + classes.join(" ")} use:uk_width={width} on:beforeshow on:show on:shown on:beforehide on:hide on:hidden>
     <slot/>
 </ul>
 

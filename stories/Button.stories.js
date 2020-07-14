@@ -46,6 +46,7 @@ export const Main = () => ({
 export const ButtonGroup = () => ({
     Component: ButtonGroupView,
     props: {
+        width: select("Group Width", ["",...validWidths], "", "Button Group"),
         button1: {
             text: text("Text", "Button 1", "Button 1"),
             style: select("Style", colors, "default", "Button 1"),

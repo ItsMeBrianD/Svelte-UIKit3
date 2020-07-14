@@ -1,5 +1,5 @@
 <script>
-    import {getWidthClass} from "../helpers/width";
+    import {uk_width} from "..";
     import {getBackgroundColorClass} from "../helpers/background";
 
     export let title   = "";
@@ -11,7 +11,6 @@
     export {_class as class};
 
     export let width = "";
-    classes.push(getWidthClass(width));
 
     export let backgroundColor = "";
     classes.push(getBackgroundColorClass(backgroundColor));
@@ -22,7 +21,7 @@
 </script>
 
 
-<article class={"uk-article " + _class + " " + classes.join(" ")}>
+<article class={"uk-article " + _class + " " + classes.join(" ")} use:uk_width={width}>
     <slot name="header">
         <h2 class="uk-article-title">
             <slot name="title">
