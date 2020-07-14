@@ -22,8 +22,7 @@
 
     let element;
     $: if(element){
-        console.log(options);
-        console.log(uikit.accordion(element, options));
+        uikit.accordion(element, options);
     }
     let _class;
     export {_class as class}
