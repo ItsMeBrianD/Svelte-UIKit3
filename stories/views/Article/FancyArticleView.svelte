@@ -7,8 +7,9 @@
 <Article {width} {backgroundColor}>
     <div slot="header"
          class="article-hero uk-height-medium uk-background-cover uk-position-relative uk-flex uk-flex-middle uk-flex-center">
-        <h2 class={`uk-article-title uk-overlay uk-overlay-${backgroundColor} uk-width-1-1 uk-text-center`}>
-            Hero Article </h2>
+        <h2 class="uk-article-title uk-text-secondary uk-overlay uk-overlay-default uk-width-1-1 uk-text-center">
+            Hero Article
+        </h2>
     </div>
     <div slot="meta" class="uk-flex uk-flex-center">
         <span class="uk-padding-small">Brian Donald</span>

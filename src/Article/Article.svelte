@@ -2,9 +2,9 @@
     import {getWidthClass} from "../helpers/width";
     import {getBackgroundColorClass} from "../helpers/background";
 
-    export let title = "";
-    export let meta = "";
-    export let lead = "";
+    export let title   = "";
+    export let meta    = "";
+    export let lead    = "";
     export let content = "";
 
     let _class, classes = [];
@@ -15,6 +15,9 @@
 
     export let backgroundColor = "";
     classes.push(getBackgroundColorClass(backgroundColor));
+    if(backgroundColor === "primary" || backgroundColor === "secondary"){
+        classes.push("uk-light");
+    }
 
 </script>
 
