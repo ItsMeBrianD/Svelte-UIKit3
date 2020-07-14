@@ -5,6 +5,11 @@ export {default as Alert} from "./Alert/Alert.svelte";
 
 export {default as Article} from "./Article/Article.svelte";
 
+export {default as Badge} from "./Badge/Badge.svelte";
+
+export {default as Breadcrumb} from "./Breadcrumb/Breadcrumb.svelte";
+export {default as BreadcrumbItem} from "./Breadcrumb/BreadcrumbItem.svelte"
+
 export {default as Button} from "./Button/Button.svelte";
 export {default as ButtonGroup} from "./Button/ButtonGroup.svelte";
 
