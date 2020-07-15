@@ -1,7 +1,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global.Uikit = {}));
+    (global = global || self, factory(global.Uikit3 = {}));
 }(this, (function (exports) { 'use strict';
 
     function noop() { }
