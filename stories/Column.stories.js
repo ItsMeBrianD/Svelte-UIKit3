@@ -15,7 +15,9 @@ export const Main = () => ({
     Component: ColumnView,
     props: {
         props: {
-            columns: number("Number of Columns", 2, {min:2, max:6})
+            columns: number("Number of Columns", 2, {min:2, max:6}),
+            width: select("Width", ["", ...validWidths], ""),
+            divider: boolean("Divider", false)
         },
         items: number("Number of content elements", 2)
     }

@@ -31,12 +31,18 @@ const getWidthClass = (width) => {
 };
 
 export const uk_width = (node, width) => {
-    node.classList.add(getWidthClass(width));
+    if(!(typeof width === "undefined" || !width || width === "")){
+        node.classList.add(getWidthClass(width));
+    }
     let oldWidth = width;
     return {
         update(width) {
-            node.classList.remove(getWidthClass(oldWidth));
-            node.classList.add(getWidthClass(width));
+            if(!(typeof oldWidth === "undefined" || !oldWidth || oldWidth === "")) {
+                node.classList.remove(getWidthClass(oldWidth));
+            }
+            if(!(typeof width === "undefined" || !width || width === "")){
+                node.classList.add(getWidthClass(width));
+            }
             oldWidth = width;
         }
     }
