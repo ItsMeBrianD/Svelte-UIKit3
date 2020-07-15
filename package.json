@@ -1,5 +1,6 @@
 {
-  "name": "svelte-uikit",
+  "name": "svelte-uikit3",
+  "description": "A Svelte Wrapper for UIkit3",
   "version": "0.1.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -12,6 +13,7 @@
     "deploy-storybook": "storybook-to-ghpages --out docs --dry-run",
     "commit-docs-dist": "git stage dist docs && git diff --name-only --cached | grep . && git commit -m \"🤖Update dist and docs🤖\""
   },
+  "repository": "https://github.com/0c370t/Svelte-UIKit3",
   "files": [
     "dist"
   ],
