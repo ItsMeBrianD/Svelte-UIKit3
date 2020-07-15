@@ -27,7 +27,7 @@
     let headerElement = false;
     let footerElement = false;
 
-    let _class;
+    let _class = "";
     export {_class as class}
 </script>
 

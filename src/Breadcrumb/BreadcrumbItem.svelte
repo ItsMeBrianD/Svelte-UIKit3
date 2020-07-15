@@ -3,7 +3,7 @@
     export let disabled = false;
     export let isLink = true;
     export let text = "";
-    let _class;
+    let _class = "";
     export {_class as class}
 </script>
 

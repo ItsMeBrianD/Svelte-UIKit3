@@ -18,7 +18,7 @@ export const Main = () => ({
             duration : number("Duration", 200),
             multiple : boolean("Multiple", false),
             offset : number("Offset", 0),
-            width: select("Width", ["", ...validWidths], "")
+            width: select("Width", ["","wrong", ...validWidths], "")
         }
     }
 });

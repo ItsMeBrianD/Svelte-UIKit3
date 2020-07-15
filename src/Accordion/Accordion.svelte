@@ -23,7 +23,7 @@
     $: if(element){
         uikit.accordion(element, options);
     }
-    let _class;
+    let _class = "";
     export {_class as class}
 </script>
 

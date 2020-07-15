@@ -5,7 +5,7 @@
     export let divider = false;
     if(columns > 6) columns = 6;
     if(columns < 2) columns = 2;
-    let _class;
+    let _class = "";
     export {_class as class}
 </script>
 

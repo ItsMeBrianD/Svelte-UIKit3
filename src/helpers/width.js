@@ -1,3 +1,5 @@
+import {checkAndSet, checkAndUpdate} from "./action_helpers";
+
 export const validWidths = [
     "1-6",
     "1-5",
@@ -17,33 +19,28 @@ export const validWidths = [
     "xlarge",
     "2xlarge",
     "auto",
-    "expand"
+    "expand",
 ];
 
 const getWidthClass = (width) => {
-    if(typeof width === "undefined" || !width || width === "") return;
-    if(validWidths.includes(width.toLowerCase())){
+    if (typeof width === "undefined" || !width || width === "") return false;
+    if (validWidths.includes(width.toLowerCase())) {
         return "uk-width-" + width.toLowerCase();
     } else {
         console.warn("Invalid width given: " + width);
-        return "";
+        return false;
     }
 };
 
 export const uk_width = (node, width) => {
-    if(!(typeof width === "undefined" || !width || width === "")){
-        node.classList.add(getWidthClass(width));
-    }
+    checkAndSet(node, width, getWidthClass)
     let oldWidth = width;
     return {
         update(width) {
-            if(!(typeof oldWidth === "undefined" || !oldWidth || oldWidth === "")) {
-                node.classList.remove(getWidthClass(oldWidth));
+            if (oldWidth !== width) {
+                checkAndUpdate(node, oldWidth, width, getWidthClass);
+                oldWidth = width;
             }
-            if(!(typeof width === "undefined" || !width || width === "")){
-                node.classList.add(getWidthClass(width));
-            }
-            oldWidth = width;
         }
     }
 }

@@ -21,7 +21,7 @@
 
     export let width = "";
 
-    let _class;
+    let _class = "";
     export {_class as class};
 </script>
 

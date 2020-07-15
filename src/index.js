@@ -20,8 +20,17 @@ export {default as Column} from "./Column/Column.svelte";
 export {default as Comment} from "./Comment/Comment.svelte";
 export {default as CommentList} from "./Comment/CommentList.svelte";
 
+export {default as Container} from "./Container/Container.svelte";
+
+export {default as Countdown} from "./Countdown/Countdown.svelte";
+
+export {default as Divider} from "./Divider/Divider.svelte";
+
+export {default as Drop} from "./Drop/Drop.svelte";
+
 export {default as Dropdown} from "./Dropdown/Dropdown.svelte";
 
 export {default as Inline} from "./Utility/Inline.svelte";
 
 export {uk_width} from "./helpers/width";
+export {uk_animate} from "./helpers/animation";
