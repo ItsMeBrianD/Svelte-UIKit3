@@ -16,6 +16,7 @@ export const Main = () => ({
         showClose: boolean("Show Close Button", false),
         largeClose: boolean("Large Close Button", false),
         style: select("Style", colors, ""),
-        width: select("Width", ["", ...validWidths], "")
+        width: select("Width", ["", ...validWidths], ""),
+        title: text("Title", "")
     },
 });

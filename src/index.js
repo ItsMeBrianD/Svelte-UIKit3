@@ -2,6 +2,7 @@ export {default as Accordion} from "./Accordion/Accordion.svelte";
 export {default as AccordionItem} from "./Accordion/AccordionItem.svelte";
 
 export {default as Alert} from "./Alert/Alert.svelte";
+export {alertOptions} from "./Alert/Alert.svelte";
 
 export {default as Article} from "./Article/Article.svelte";
 
