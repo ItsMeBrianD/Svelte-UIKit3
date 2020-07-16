@@ -1,14 +1,19 @@
+<script context="module">
+    const colors = ["default", "primary", "secondary"];
+    export const cardOptions = {
+        colors
+    }
+</script>
+
 <script>
     import {Badge, uk_width} from "..";
-
 
     export let title = "";
     export let titleIsHeader = false;
 
     let classes = ["uk-card", "uk-card-body"];
 
-    export let color = "default";
-    let colors = ["default", "primary", "secondary"];
+    export let color = "";
     if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color);
     else classes.push("uk-card-default");
 
