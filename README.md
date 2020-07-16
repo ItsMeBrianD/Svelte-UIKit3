@@ -20,4 +20,4 @@ Add the stylesheet:
 ## Documentation
 - [Theming instructions](https://getuikit.com/docs/sass)  
 - [Storybook Export](https://0c370t.github.io/Svelte-UIKit3/docs/)  
-- [Component Directory](src)
+- [Component Directory](src/README.md)
