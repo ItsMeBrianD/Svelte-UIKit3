@@ -1,12 +1,20 @@
+<script context="module">
+    const styles = ["default", "primary", "secondary", "danger", "text", "link"];
+    const sizes = ["small", "large"];
+    export const buttonOptions = {
+        styles,
+        sizes
+    }
+</script>
+
 <script>
     import {uk_width} from "..";
 
-    export let text;
+    export let text = "";
     let classes = ["uk-button"];
 
 
-    export let style = "default";
-    const styles = ["default", "primary", "secondary", "danger", "text", "link"];
+    export let style = "";
     if (styles.includes(style.toLowerCase())) {
         classes.push("uk-button-" + style.toLowerCase());
     } else {
@@ -14,7 +22,6 @@
     }
 
     export let size = "";
-    const sizes = ["small", "large"];
     if (sizes.includes(size.toLowerCase())) {
         classes.push("uk-button-" + size.toLowerCase());
     }

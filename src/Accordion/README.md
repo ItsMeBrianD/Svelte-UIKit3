@@ -12,9 +12,16 @@
 | duration    | int   | Animation Duration           |                                 |
 | multiple    | bool  | Allow opening multiple items |                                 |
 | offset      | num   | Offset of item from title    |                                 |
-| width       | enum  | Width of the accordion       | [helpers/width.js](../helpers/) |
+| width       | enum  | Width of the accordion       | [helpers/width.js](../helpers#width) |
+
+#### Slots
+
+| name    | type           | inside              | description                                 |
+|---------|----------------|---------------------|---------------------------------------------|
+| default | AccordionItems | root element (ul)   | AccordionItems that belong inside Accordion |
+
 #### Real Example
-Note that all props are default values
+> Note that all props are default values
 ```html
 <script>
     import {Accordion, AccordionItem} from 'svelte-uikit3';
@@ -30,3 +37,18 @@ Note that all props are default values
 </Accordion>
 ```
 
+# AccordionItem
+This component should only exist within `Accordion`
+
+## Usage
+
+#### Props
+| name        | type  | description                  | see also                        |
+|-------------|-------|------------------------------|---------------------------------|
+| title       | str   | Title of accordion item      |
+
+#### Slots
+
+| name    | type  | inside                     | description                                 |
+|---------|-------|----------------------------|---------------------------------------------|
+| default | any   | div.uk-accordion-content   | Content that is unfurled by the accordion   |

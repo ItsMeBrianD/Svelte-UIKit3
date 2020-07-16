@@ -12,4 +12,4 @@
 |-------------|-------|------------------------------|---------------------------------|
 
 #### Real Example
-Note that all props are default values
+> Note that all props are default values

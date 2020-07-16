@@ -1,8 +1,7 @@
 export {default as Accordion} from "./Accordion/Accordion.svelte";
 export {default as AccordionItem} from "./Accordion/AccordionItem.svelte";
 
-export {default as Alert} from "./Alert/Alert.svelte";
-export {alertOptions} from "./Alert/Alert.svelte";
+export {default as Alert, alertOptions} from "./Alert/Alert.svelte";
 
 export {default as Article} from "./Article/Article.svelte";
 
@@ -11,11 +10,10 @@ export {default as Badge} from "./Badge/Badge.svelte";
 export {default as Breadcrumb} from "./Breadcrumb/Breadcrumb.svelte";
 export {default as BreadcrumbItem} from "./Breadcrumb/BreadcrumbItem.svelte"
 
-export {default as Button} from "./Button/Button.svelte";
+export {default as Button, buttonOptions} from "./Button/Button.svelte";
 export {default as ButtonGroup} from "./Button/ButtonGroup.svelte";
 
-export {default as Card} from "./Card/Card.svelte";
-export {cardOptions} from "./Card/Card.svelte";
+export {default as Card, cardOptions} from "./Card/Card.svelte";
 
 export {default as Column} from "./Column/Column.svelte";
 
@@ -32,8 +30,7 @@ export {default as Drop} from "./Drop/Drop.svelte";
 
 export {default as Dropdown} from "./Dropdown/Dropdown.svelte";
 
-export {default as Flex} from "./Flex/Flex.svelte";
-export {flexOptions} from "./Flex/Flex.svelte";
+export {default as Flex, flexOptions} from "./Flex/Flex.svelte";
 
 export {default as Inline} from "./Utility/Inline.svelte";
 

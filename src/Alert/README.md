@@ -13,8 +13,14 @@
 | width       | enum  | Width of the alert           | [helpers/width.js](../helpers/)                   |                                |
 | title       | str   | Title of the Alert           |                                                   |
 
+#### Slots
+
+| name    | type | inside              | description                               |
+|---------|------|---------------------|-------------------------------------------|
+| default | any  | root element (div)  | Content of the alert                      |
+
 #### Real Example
-Note that all props are default values
+> Note that all props are default values
 ```html
 <script>
     import {Alert} from 'svelte-uikit3';
