@@ -7,7 +7,10 @@
 <Article {width} {backgroundColor}>
     <div slot="header"
          class="article-hero uk-height-medium uk-background-cover uk-position-relative uk-flex uk-flex-middle uk-flex-center">
-        <h2 class="uk-article-title uk-text-secondary uk-overlay uk-overlay-default uk-width-1-1 uk-text-center">
+        <h2 class="uk-article-title uk-text-secondary uk-overlay uk-width-1-1 uk-text-center"
+            class:uk-overlay-default={backgroundColor === "default" || backgroundColor === "muted"}
+            class:uk-overlay-primary={backgroundColor === "primary" || backgroundColor === "secondary"}
+        >
             Hero Article
         </h2>
     </div>
