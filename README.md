@@ -8,6 +8,16 @@ Add the package:
 Add the stylesheet:  
 `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.4/dist/css/uikit.min.css" />`
 
-Theming instructions [here](https://getuikit.com/docs/sass)
+### Example Usage
+```html
+<script>
+    import {Button} from 'svelte-uikit3';
+</script>
 
-Storybook [here](https://0c370t.github.io/Svelte-UIKit3/docs/)
+<Button>Hello World!</Button>
+```
+
+## Documentation
+- [Theming instructions](https://getuikit.com/docs/sass)  
+- [Storybook Export](https://0c370t.github.io/Svelte-UIKit3/docs/)  
+- [Component Directory](src)
