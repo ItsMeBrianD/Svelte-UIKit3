@@ -1,6 +1,9 @@
 # Svelte-UIKit
 A Svelte Wrapper layer for [Uikit3](https://getuikit.com).
 
+[npm](https://www.npmjs.com/package/svelte-uikit3)
+
+
 ## Installation
 Add the package:  
 `npm install svelte-uikit3 -D`
