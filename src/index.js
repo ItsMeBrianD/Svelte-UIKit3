@@ -30,6 +30,9 @@ export {default as Drop} from "./Drop/Drop.svelte";
 
 export {default as Dropdown} from "./Dropdown/Dropdown.svelte";
 
+export {default as Filter} from "./Filter/Filter.svelte";
+export {default as FilterControl} from "./Filter/FilterControl.svelte";
+
 export {default as Flex, flexOptions} from "./Flex/Flex.svelte";
 
 export {default as Inline} from "./Utility/Inline.svelte";

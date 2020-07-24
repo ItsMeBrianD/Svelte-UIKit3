@@ -3,6 +3,8 @@
     export const alertOptions = {
         styles
     }
+
+    let name = 0;
 </script>
 
 <script>

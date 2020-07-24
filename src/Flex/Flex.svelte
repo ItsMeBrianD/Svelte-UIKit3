@@ -36,11 +36,14 @@
         if(wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-"+wrapAlignment);
     }
 
+    let _class = "";
+    export {_class as class}
     export let width;
+    export let element;
 
     classes = classes.map(c=>c.toLowerCase());
 </script>
 
-<div use:uk_width={width} class={classes.join(" ")}>
-<slot/>
+<div use:uk_width={width} class={classes.join(" ") + " " + _class} bind:this={element}>
+    <slot/>
 </div>
