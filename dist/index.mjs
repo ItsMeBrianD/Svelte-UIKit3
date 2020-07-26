@@ -116,6 +116,14 @@ let current_component;
 function set_current_component(component) {
     current_component = component;
 }
+function get_current_component() {
+    if (!current_component)
+        throw new Error(`Function called outside component initialization`);
+    return current_component;
+}
+function onMount(fn) {
+    get_current_component().$$.on_mount.push(fn);
+}
 // TODO figure out if we still want to support
 // shorthand events, or if we want to implement
 // a real bubbling mechanism
@@ -12879,7 +12887,7 @@ function create_if_block(ctx) {
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
-			/*button_binding*/ ctx[10](button);
+			/*button_binding*/ ctx[13](button);
 		},
 		p(ctx, dirty) {
 			if (dirty & /*largeClose*/ 2) {
@@ -12888,7 +12896,25 @@ function create_if_block(ctx) {
 		},
 		d(detaching) {
 			if (detaching) detach(button);
-			/*button_binding*/ ctx[10](null);
+			/*button_binding*/ ctx[13](null);
+		}
+	};
+}
+
+// (43:14)              
+function fallback_block$1(ctx) {
+	let p;
+
+	return {
+		c() {
+			p = element("p");
+			p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid cupiditate dignissimos,\n                dolores\n                eius,\n                enim eos expedita in libero molestiae nisi odit quae, quas quis ratione recusandae reiciendis sed\n                ullam.";
+		},
+		m(target, anchor) {
+			insert(target, p, anchor);
+		},
+		d(detaching) {
+			if (detaching) detach(p);
 		}
 	};
 }
@@ -12898,13 +12924,18 @@ function create_fragment$2(ctx) {
 	let div0;
 	let t0;
 	let h3;
+	let t1_value = (/*title*/ ctx[4] || "Alert!") + "";
+	let t1;
 	let t2;
-	let p;
 	let div0_class_value;
 	let uk_width_action;
+	let current;
 	let mounted;
 	let dispose;
 	let if_block = /*showClose*/ ctx[0] && create_if_block(ctx);
+	const default_slot_template = /*$$slots*/ ctx[10].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[9], null);
+	const default_slot_or_fallback = default_slot || fallback_block$1();
 
 	return {
 		c() {
@@ -12913,11 +12944,10 @@ function create_fragment$2(ctx) {
 			if (if_block) if_block.c();
 			t0 = space();
 			h3 = element("h3");
-			h3.textContent = "Alert!";
+			t1 = text(t1_value);
 			t2 = space();
-			p = element("p");
-			p.textContent = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid cupiditate dignissimos, dolores\n            eius,\n            enim eos expedita in libero molestiae nisi odit quae, quas quis ratione recusandae reiciendis sed\n            ullam.";
-			attr(div0, "class", div0_class_value = /*classes*/ ctx[6].join(" ") + " " + /*_class*/ ctx[3]);
+			if (default_slot_or_fallback) default_slot_or_fallback.c();
+			attr(div0, "class", div0_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[3]);
 		},
 		m(target, anchor) {
 			insert(target, div1, anchor);
@@ -12925,14 +12955,20 @@ function create_fragment$2(ctx) {
 			if (if_block) if_block.m(div0, null);
 			append(div0, t0);
 			append(div0, h3);
+			append(h3, t1);
 			append(div0, t2);
-			append(div0, p);
-			/*div0_binding*/ ctx[11](div0);
+
+			if (default_slot_or_fallback) {
+				default_slot_or_fallback.m(div0, null);
+			}
+
+			/*div0_binding*/ ctx[14](div0);
+			current = true;
 
 			if (!mounted) {
 				dispose = [
-					listen(div0, "hide", /*hide_handler*/ ctx[8]),
-					listen(div0, "beforehide", /*beforehide_handler*/ ctx[9]),
+					listen(div0, "hide", /*hide_handler*/ ctx[11]),
+					listen(div0, "beforehide", /*beforehide_handler*/ ctx[12]),
 					action_destroyer(uk_width_action = uk_width.call(null, div1, /*width*/ ctx[2]))
 				];
 
@@ -12953,37 +12989,53 @@ function create_fragment$2(ctx) {
 				if_block = null;
 			}
 
-			if (dirty & /*_class*/ 8 && div0_class_value !== (div0_class_value = /*classes*/ ctx[6].join(" ") + " " + /*_class*/ ctx[3])) {
+			if ((!current || dirty & /*title*/ 16) && t1_value !== (t1_value = (/*title*/ ctx[4] || "Alert!") + "")) set_data(t1, t1_value);
+
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 512) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[9], dirty, null, null);
+				}
+			}
+
+			if (!current || dirty & /*_class*/ 8 && div0_class_value !== (div0_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[3])) {
 				attr(div0, "class", div0_class_value);
 			}
 
 			if (uk_width_action && is_function(uk_width_action.update) && dirty & /*width*/ 4) uk_width_action.update.call(null, /*width*/ ctx[2]);
 		},
-		i: noop,
-		o: noop,
+		i(local) {
+			if (current) return;
+			transition_in(default_slot_or_fallback, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot_or_fallback, local);
+			current = false;
+		},
 		d(detaching) {
 			if (detaching) detach(div1);
 			if (if_block) if_block.d();
-			/*div0_binding*/ ctx[11](null);
+			if (default_slot_or_fallback) default_slot_or_fallback.d(detaching);
+			/*div0_binding*/ ctx[14](null);
 			mounted = false;
 			run_all(dispose);
 		}
 	};
 }
 
+const styles = ["primary", "success", "warning", "danger"];
+const alertOptions = { styles };
+
 function instance$2($$self, $$props, $$invalidate) {
 	let element, closeElem, options = {}, classes = [];
 	let { showClose = false } = $$props;
 	let { largeClose = false } = $$props;
-	let { style = false } = $$props;
-	const styles = ["primary", "success", "warning", "danger"];
-
-	if (style && styles.includes(style.toLowerCase())) {
-		classes.push("uk-alert-" + style);
-	}
-
+	let { style = "" } = $$props;
+	if (styles.includes(style.toLowerCase())) classes.push("uk-alert-" + style);
 	let { width = "" } = $$props;
 	let { class: _class = "" } = $$props;
+	let { title = "" } = $$props;
+	let { $$slots = {}, $$scope } = $$props;
 
 	function hide_handler(event) {
 		bubble($$self, event);
@@ -12996,33 +13048,35 @@ function instance$2($$self, $$props, $$invalidate) {
 	function button_binding($$value) {
 		binding_callbacks[$$value ? "unshift" : "push"](() => {
 			closeElem = $$value;
-			$$invalidate(5, closeElem);
+			$$invalidate(6, closeElem);
 		});
 	}
 
 	function div0_binding($$value) {
 		binding_callbacks[$$value ? "unshift" : "push"](() => {
 			element = $$value;
-			$$invalidate(4, element);
+			$$invalidate(5, element);
 		});
 	}
 
 	$$self.$set = $$props => {
 		if ("showClose" in $$props) $$invalidate(0, showClose = $$props.showClose);
 		if ("largeClose" in $$props) $$invalidate(1, largeClose = $$props.largeClose);
-		if ("style" in $$props) $$invalidate(7, style = $$props.style);
+		if ("style" in $$props) $$invalidate(8, style = $$props.style);
 		if ("width" in $$props) $$invalidate(2, width = $$props.width);
 		if ("class" in $$props) $$invalidate(3, _class = $$props.class);
+		if ("title" in $$props) $$invalidate(4, title = $$props.title);
+		if ("$$scope" in $$props) $$invalidate(9, $$scope = $$props.$$scope);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*element*/ 16) {
+		if ($$self.$$.dirty & /*element*/ 32) {
 			 if (element) {
 				uikit.alert(element, options);
 			}
 		}
 
-		if ($$self.$$.dirty & /*closeElem*/ 32) {
+		if ($$self.$$.dirty & /*closeElem*/ 64) {
 			 if (closeElem) {
 				uikit.close(closeElem);
 			}
@@ -13034,10 +13088,13 @@ function instance$2($$self, $$props, $$invalidate) {
 		largeClose,
 		width,
 		_class,
+		title,
 		element,
 		closeElem,
 		classes,
 		style,
+		$$scope,
+		$$slots,
 		hide_handler,
 		beforehide_handler,
 		button_binding,
@@ -13052,9 +13109,10 @@ class Alert extends SvelteComponent {
 		init(this, options, instance$2, create_fragment$2, safe_not_equal, {
 			showClose: 0,
 			largeClose: 1,
-			style: 7,
+			style: 8,
 			width: 2,
-			class: 3
+			class: 3,
+			title: 4
 		});
 	}
 }
@@ -13196,7 +13254,7 @@ function fallback_block_1(ctx) {
 }
 
 // (42:10)          
-function fallback_block$1(ctx) {
+function fallback_block$2(ctx) {
 	let p;
 	let t;
 
@@ -13241,7 +13299,7 @@ function create_fragment$3(ctx) {
 	const lead_slot_or_fallback = lead_slot || fallback_block_1(ctx);
 	const default_slot_template = /*$$slots*/ ctx[9].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[8], null);
-	const default_slot_or_fallback = default_slot || fallback_block$1(ctx);
+	const default_slot_or_fallback = default_slot || fallback_block$2(ctx);
 
 	return {
 		c() {
@@ -13426,7 +13484,7 @@ class Article extends SvelteComponent {
 
 /* src/Badge/Badge.svelte generated by Svelte v3.24.0 */
 
-function fallback_block$2(ctx) {
+function fallback_block$3(ctx) {
 	let t;
 
 	return {
@@ -13450,7 +13508,7 @@ function create_fragment$4(ctx) {
 	let current;
 	const default_slot_template = /*$$slots*/ ctx[3].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
-	const default_slot_or_fallback = default_slot || fallback_block$2(ctx);
+	const default_slot_or_fallback = default_slot || fallback_block$3(ctx);
 
 	return {
 		c() {
@@ -13651,7 +13709,7 @@ function create_if_block$1(ctx) {
 	let current;
 	const default_slot_template = /*$$slots*/ ctx[6].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[5], null);
-	const default_slot_or_fallback = default_slot || fallback_block$3(ctx);
+	const default_slot_or_fallback = default_slot || fallback_block$4(ctx);
 
 	return {
 		c() {
@@ -13725,7 +13783,7 @@ function fallback_block_1$1(ctx) {
 }
 
 // (13:18)                  
-function fallback_block$3(ctx) {
+function fallback_block$4(ctx) {
 	let t;
 
 	return {
@@ -13852,7 +13910,7 @@ class BreadcrumbItem extends SvelteComponent {
 
 /* src/Button/Button.svelte generated by Svelte v3.24.0 */
 
-function fallback_block$4(ctx) {
+function fallback_block$5(ctx) {
 	let t;
 
 	return {
@@ -13880,7 +13938,7 @@ function create_fragment$7(ctx) {
 	let dispose;
 	const default_slot_template = /*$$slots*/ ctx[7].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[6], null);
-	const default_slot_or_fallback = default_slot || fallback_block$4(ctx);
+	const default_slot_or_fallback = default_slot || fallback_block$5(ctx);
 
 	return {
 		c() {
@@ -13899,11 +13957,11 @@ function create_fragment$7(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(button, "focus", /*focus_handler*/ ctx[12]),
+					listen(button, "focus", /*focus_handler*/ ctx[8]),
 					listen(button, "blur", /*blur_handler*/ ctx[9]),
 					listen(button, "focusin", /*focusin_handler*/ ctx[10]),
 					listen(button, "focusout", /*focusout_handler*/ ctx[11]),
-					listen(button, "click", /*click_handler*/ ctx[8]),
+					listen(button, "click", /*click_handler*/ ctx[12]),
 					listen(button, "dblclick", /*dblclick_handler*/ ctx[13]),
 					listen(button, "mouseenter", /*mouseenter_handler*/ ctx[14]),
 					listen(button, "mouseleave", /*mouseleave_handler*/ ctx[15]),
@@ -13949,20 +14007,22 @@ function create_fragment$7(ctx) {
 	};
 }
 
-function instance$7($$self, $$props, $$invalidate) {
-	let { text } = $$props;
-	let classes = ["uk-button"];
-	let { style = "default" } = $$props;
-	const styles = ["default", "primary", "secondary", "danger", "text", "link"];
+const styles$1 = ["default", "primary", "secondary", "danger", "text", "link"];
+const sizes = ["small", "large"];
+const buttonOptions = { styles: styles$1, sizes };
 
-	if (styles.includes(style.toLowerCase())) {
+function instance$7($$self, $$props, $$invalidate) {
+	let { text = "" } = $$props;
+	let classes = ["uk-button"];
+	let { style = "" } = $$props;
+
+	if (styles$1.includes(style.toLowerCase())) {
 		classes.push("uk-button-" + style.toLowerCase());
 	} else {
 		classes.push("uk-button-default");
 	}
 
 	let { size = "" } = $$props;
-	const sizes = ["small", "large"];
 
 	if (sizes.includes(size.toLowerCase())) {
 		classes.push("uk-button-" + size.toLowerCase());
@@ -13972,7 +14032,7 @@ function instance$7($$self, $$props, $$invalidate) {
 	let { class: _class = "" } = $$props;
 	let { $$slots = {}, $$scope } = $$props;
 
-	function click_handler(event) {
+	function focus_handler(event) {
 		bubble($$self, event);
 	}
 
@@ -13988,7 +14048,7 @@ function instance$7($$self, $$props, $$invalidate) {
 		bubble($$self, event);
 	}
 
-	function focus_handler(event) {
+	function click_handler(event) {
 		bubble($$self, event);
 	}
 
@@ -14026,11 +14086,11 @@ function instance$7($$self, $$props, $$invalidate) {
 		size,
 		$$scope,
 		$$slots,
-		click_handler,
+		focus_handler,
 		blur_handler,
 		focusin_handler,
 		focusout_handler,
-		focus_handler,
+		click_handler,
 		dblclick_handler,
 		mouseenter_handler,
 		mouseleave_handler,
@@ -14142,7 +14202,7 @@ const get_footer_slot_context = ctx => ({});
 const get_header_slot_changes$1 = dirty => ({});
 const get_header_slot_context$1 = ctx => ({});
 
-// (38:32)                  
+// (43:28)              
 function fallback_block_1$2(ctx) {
 	let div;
 
@@ -14162,7 +14222,7 @@ function fallback_block_1$2(ctx) {
 	};
 }
 
-// (51:8) {#if badge}
+// (56:4) {#if badge}
 function create_if_block$2(ctx) {
 	let badge_1;
 	let current;
@@ -14199,8 +14259,8 @@ function create_if_block$2(ctx) {
 	};
 }
 
-// (56:32)                  
-function fallback_block$5(ctx) {
+// (61:28)              
+function fallback_block$6(ctx) {
 	let div;
 
 	return {
@@ -14220,7 +14280,6 @@ function fallback_block$5(ctx) {
 }
 
 function create_fragment$9(ctx) {
-	let div5;
 	let div4;
 	let div0;
 	let t0;
@@ -14245,11 +14304,10 @@ function create_fragment$9(ctx) {
 	let if_block = /*badge*/ ctx[2] && create_if_block$2(ctx);
 	const footer_slot_template = /*$$slots*/ ctx[12].footer;
 	const footer_slot = create_slot(footer_slot_template, ctx, /*$$scope*/ ctx[11], get_footer_slot_context);
-	const footer_slot_or_fallback = footer_slot || fallback_block$5(ctx);
+	const footer_slot_or_fallback = footer_slot || fallback_block$6(ctx);
 
 	return {
 		c() {
-			div5 = element("div");
 			div4 = element("div");
 			div0 = element("div");
 			if (header_slot_or_fallback) header_slot_or_fallback.c();
@@ -14276,8 +14334,7 @@ function create_fragment$9(ctx) {
 			attr(div4, "class", div4_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[4]);
 		},
 		m(target, anchor) {
-			insert(target, div5, anchor);
-			append(div5, div4);
+			insert(target, div4, anchor);
 			append(div4, div0);
 
 			if (header_slot_or_fallback) {
@@ -14307,7 +14364,7 @@ function create_fragment$9(ctx) {
 			current = true;
 
 			if (!mounted) {
-				dispose = action_destroyer(uk_width_action = uk_width.call(null, div5, /*width*/ ctx[3]));
+				dispose = action_destroyer(uk_width_action = uk_width.call(null, div4, /*width*/ ctx[3]));
 				mounted = true;
 			}
 		},
@@ -14405,7 +14462,7 @@ function create_fragment$9(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div5);
+			if (detaching) detach(div4);
 			if (header_slot_or_fallback) header_slot_or_fallback.d(detaching);
 			if (default_slot) default_slot.d(detaching);
 			if (if_block) if_block.d();
@@ -14416,12 +14473,14 @@ function create_fragment$9(ctx) {
 	};
 }
 
+const colors = ["default", "primary", "secondary"];
+const cardOptions = { colors };
+
 function instance$9($$self, $$props, $$invalidate) {
 	let { title = "" } = $$props;
 	let { titleIsHeader = false } = $$props;
 	let classes = ["uk-card", "uk-card-body"];
-	let { color = "default" } = $$props;
-	let colors = ["default", "primary", "secondary"];
+	let { color = "" } = $$props;
 	if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color); else classes.push("uk-card-default");
 	let { size = "" } = $$props;
 	let sizes = ["small", "large"];
@@ -14664,7 +14723,7 @@ function create_each_block(ctx) {
 }
 
 // (22:34)                      
-function fallback_block$6(ctx) {
+function fallback_block$7(ctx) {
 	let each_1_anchor;
 	let each_value = /*meta*/ ctx[3];
 	let each_blocks = [];
@@ -14738,7 +14797,7 @@ function create_fragment$b(ctx) {
 	let if_block = /*avatarSrc*/ ctx[0] && create_if_block$3(ctx);
 	const meta_slot_template = /*$$slots*/ ctx[7].meta;
 	const meta_slot = create_slot(meta_slot_template, ctx, /*$$scope*/ ctx[6], get_meta_slot_context$1);
-	const meta_slot_or_fallback = meta_slot || fallback_block$6(ctx);
+	const meta_slot_or_fallback = meta_slot || fallback_block$7(ctx);
 	const default_slot_template = /*$$slots*/ ctx[7].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[6], null);
 
@@ -15746,7 +15805,7 @@ function create_default_slot_1(ctx) {
 }
 
 // (62:29)          
-function fallback_block$7(ctx) {
+function fallback_block$8(ctx) {
 	let button;
 	let current;
 
@@ -15804,7 +15863,7 @@ function create_default_slot(ctx) {
 	let dispose;
 	const full_button_slot_template = /*$$slots*/ ctx[19]["full-button"];
 	const full_button_slot = create_slot(full_button_slot_template, ctx, /*$$scope*/ ctx[29], get_full_button_slot_context);
-	const full_button_slot_or_fallback = full_button_slot || fallback_block$7(ctx);
+	const full_button_slot_or_fallback = full_button_slot || fallback_block$8(ctx);
 	const default_slot_template = /*$$slots*/ ctx[19].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[29], null);
 
@@ -15833,10 +15892,10 @@ function create_default_slot(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(div, "toggle", /*toggle_handler*/ ctx[21]),
-					listen(div, "beforeshow", /*beforeshow_handler*/ ctx[22]),
-					listen(div, "show", /*show_handler*/ ctx[23]),
-					listen(div, "shown", /*shown_handler*/ ctx[20]),
+					listen(div, "toggle", /*toggle_handler*/ ctx[20]),
+					listen(div, "beforeshow", /*beforeshow_handler*/ ctx[21]),
+					listen(div, "show", /*show_handler*/ ctx[22]),
+					listen(div, "shown", /*shown_handler*/ ctx[23]),
 					listen(div, "beforehide", /*beforehide_handler*/ ctx[24]),
 					listen(div, "hide", /*hide_handler*/ ctx[25]),
 					listen(div, "hidden", /*hidden_handler*/ ctx[26]),
@@ -15987,10 +16046,6 @@ function instance$g($$self, $$props, $$invalidate) {
 	let { class: _class = "" } = $$props;
 	let { $$slots = {}, $$scope } = $$props;
 
-	function shown_handler(event) {
-		bubble($$self, event);
-	}
-
 	function toggle_handler(event) {
 		bubble($$self, event);
 	}
@@ -16000,6 +16055,10 @@ function instance$g($$self, $$props, $$invalidate) {
 	}
 
 	function show_handler(event) {
+		bubble($$self, event);
+	}
+
+	function shown_handler(event) {
 		bubble($$self, event);
 	}
 
@@ -16087,10 +16146,10 @@ function instance$g($$self, $$props, $$invalidate) {
 		hide,
 		show,
 		$$slots,
-		shown_handler,
 		toggle_handler,
 		beforeshow_handler,
 		show_handler,
+		shown_handler,
 		beforehide_handler,
 		hide_handler,
 		hidden_handler,
@@ -16209,7 +16268,7 @@ function fallback_block_1$4(ctx) {
 }
 
 // (69:10)          
-function fallback_block$8(ctx) {
+function fallback_block$9(ctx) {
 	let ul;
 
 	return {
@@ -16246,7 +16305,7 @@ function create_fragment$h(ctx) {
 	const handle_slot_or_fallback = handle_slot || fallback_block_1$4(ctx);
 	const default_slot_template = /*$$slots*/ ctx[10].default;
 	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[20], null);
-	const default_slot_or_fallback = default_slot || fallback_block$8();
+	const default_slot_or_fallback = default_slot || fallback_block$9();
 
 	return {
 		c() {
@@ -16502,9 +16561,400 @@ class Dropdown extends SvelteComponent {
 	}
 }
 
-/* src/Utility/Inline.svelte generated by Svelte v3.24.0 */
+/* src/Filter/Filter.svelte generated by Svelte v3.24.0 */
+
+function add_css$2() {
+	var style = element("style");
+	style.id = "svelte-1ppivq5-style";
+	style.textContent = "div.svelte-1ppivq5{display:contents}";
+	append(document.head, style);
+}
+
+const get_controls_slot_changes = dirty => ({});
+const get_controls_slot_context = ctx => ({});
 
 function create_fragment$i(ctx) {
+	let div1;
+	let t;
+	let div0;
+	let current;
+	const controls_slot_template = /*$$slots*/ ctx[4].controls;
+	const controls_slot = create_slot(controls_slot_template, ctx, /*$$scope*/ ctx[3], get_controls_slot_context);
+	const default_slot_template = /*$$slots*/ ctx[4].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+
+	return {
+		c() {
+			div1 = element("div");
+			if (controls_slot) controls_slot.c();
+			t = space();
+			div0 = element("div");
+			if (default_slot) default_slot.c();
+			attr(div0, "class", "svelte-1ppivq5");
+			attr(div1, "class", "svelte-1ppivq5");
+		},
+		m(target, anchor) {
+			insert(target, div1, anchor);
+
+			if (controls_slot) {
+				controls_slot.m(div1, null);
+			}
+
+			append(div1, t);
+			append(div1, div0);
+
+			if (default_slot) {
+				default_slot.m(div0, null);
+			}
+
+			/*div0_binding*/ ctx[5](div0);
+			/*div1_binding*/ ctx[6](div1);
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (controls_slot) {
+				if (controls_slot.p && dirty & /*$$scope*/ 8) {
+					update_slot(controls_slot, controls_slot_template, ctx, /*$$scope*/ ctx[3], dirty, get_controls_slot_changes, get_controls_slot_context);
+				}
+			}
+
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 8) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[3], dirty, null, null);
+				}
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(controls_slot, local);
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(controls_slot, local);
+			transition_out(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div1);
+			if (controls_slot) controls_slot.d(detaching);
+			if (default_slot) default_slot.d(detaching);
+			/*div0_binding*/ ctx[5](null);
+			/*div1_binding*/ ctx[6](null);
+		}
+	};
+}
+
+function instance$i($$self, $$props, $$invalidate) {
+	let { contentElement = false } = $$props;
+	let element, _contentElement;
+
+	onMount(() => {
+		try {
+			console.log(contentElement);
+
+			if (contentElement) {
+				uikit.filter(element, { target: contentElement });
+			} else {
+				uikit.filter(element, { target: _contentElement });
+			}
+		} catch(e) {
+			console.log(e);
+		}
+	});
+
+	let { $$slots = {}, $$scope } = $$props;
+
+	function div0_binding($$value) {
+		binding_callbacks[$$value ? "unshift" : "push"](() => {
+			_contentElement = $$value;
+			$$invalidate(1, _contentElement);
+		});
+	}
+
+	function div1_binding($$value) {
+		binding_callbacks[$$value ? "unshift" : "push"](() => {
+			element = $$value;
+			$$invalidate(0, element);
+		});
+	}
+
+	$$self.$set = $$props => {
+		if ("contentElement" in $$props) $$invalidate(2, contentElement = $$props.contentElement);
+		if ("$$scope" in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+	};
+
+	return [
+		element,
+		_contentElement,
+		contentElement,
+		$$scope,
+		$$slots,
+		div0_binding,
+		div1_binding
+	];
+}
+
+class Filter extends SvelteComponent {
+	constructor(options) {
+		super();
+		if (!document.getElementById("svelte-1ppivq5-style")) add_css$2();
+		init(this, options, instance$i, create_fragment$i, safe_not_equal, { contentElement: 2 });
+	}
+}
+
+/* src/Filter/FilterControl.svelte generated by Svelte v3.24.0 */
+
+function add_css$3() {
+	var style = element("style");
+	style.id = "svelte-1rsx962-style";
+	style.textContent = "span.svelte-1rsx962{display:contents}";
+	append(document.head, style);
+}
+
+function create_fragment$j(ctx) {
+	let span;
+	let span_uk_filter_control_value;
+	let current;
+	const default_slot_template = /*$$slots*/ ctx[4].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[3], null);
+
+	return {
+		c() {
+			span = element("span");
+			if (default_slot) default_slot.c();
+			attr(span, "uk-filter-control", span_uk_filter_control_value = `filter:${/*selector*/ ctx[0]}; group:${/*group*/ ctx[1]}`);
+			attr(span, "class", "svelte-1rsx962");
+		},
+		m(target, anchor) {
+			insert(target, span, anchor);
+
+			if (default_slot) {
+				default_slot.m(span, null);
+			}
+
+			/*span_binding*/ ctx[5](span);
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 8) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[3], dirty, null, null);
+				}
+			}
+
+			if (!current || dirty & /*selector, group*/ 3 && span_uk_filter_control_value !== (span_uk_filter_control_value = `filter:${/*selector*/ ctx[0]}; group:${/*group*/ ctx[1]}`)) {
+				attr(span, "uk-filter-control", span_uk_filter_control_value);
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(span);
+			if (default_slot) default_slot.d(detaching);
+			/*span_binding*/ ctx[5](null);
+		}
+	};
+}
+
+function instance$j($$self, $$props, $$invalidate) {
+	let { selector = "" } = $$props;
+	let { group = "" } = $$props;
+	let element = null;
+	let { $$slots = {}, $$scope } = $$props;
+
+	function span_binding($$value) {
+		binding_callbacks[$$value ? "unshift" : "push"](() => {
+			element = $$value;
+			$$invalidate(2, element);
+		});
+	}
+
+	$$self.$set = $$props => {
+		if ("selector" in $$props) $$invalidate(0, selector = $$props.selector);
+		if ("group" in $$props) $$invalidate(1, group = $$props.group);
+		if ("$$scope" in $$props) $$invalidate(3, $$scope = $$props.$$scope);
+	};
+
+	return [selector, group, element, $$scope, $$slots, span_binding];
+}
+
+class FilterControl extends SvelteComponent {
+	constructor(options) {
+		super();
+		if (!document.getElementById("svelte-1rsx962-style")) add_css$3();
+		init(this, options, instance$j, create_fragment$j, safe_not_equal, { selector: 0, group: 1 });
+	}
+}
+
+/* src/Flex/Flex.svelte generated by Svelte v3.24.0 */
+
+function create_fragment$k(ctx) {
+	let div;
+	let div_class_value;
+	let uk_width_action;
+	let current;
+	let mounted;
+	let dispose;
+	const default_slot_template = /*$$slots*/ ctx[11].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[10], null);
+
+	return {
+		c() {
+			div = element("div");
+			if (default_slot) default_slot.c();
+			attr(div, "class", div_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[1]);
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+
+			if (default_slot) {
+				default_slot.m(div, null);
+			}
+
+			/*div_binding*/ ctx[12](div);
+			current = true;
+
+			if (!mounted) {
+				dispose = action_destroyer(uk_width_action = uk_width.call(null, div, /*width*/ ctx[2]));
+				mounted = true;
+			}
+		},
+		p(ctx, [dirty]) {
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 1024) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[10], dirty, null, null);
+				}
+			}
+
+			if (!current || dirty & /*classes, _class*/ 10 && div_class_value !== (div_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[1])) {
+				attr(div, "class", div_class_value);
+			}
+
+			if (uk_width_action && is_function(uk_width_action.update) && dirty & /*width*/ 4) uk_width_action.update.call(null, /*width*/ ctx[2]);
+		},
+		i(local) {
+			if (current) return;
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+			if (default_slot) default_slot.d(detaching);
+			/*div_binding*/ ctx[12](null);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+const justifications = ["left", "center", "right", "between", "around"];
+const alignments = ["stretch", "top", "middle", "bottom"];
+const directions = ["row", "row-reverse", "column", "column-reverse"];
+const wraps = ["wrap", "wrap-reverse", "nowrap"];
+const wrapAlignments = ["stretch", "between", "around", "top", "middle", "bottom"];
+
+const flexOptions = {
+	justifications,
+	alignments,
+	directions,
+	wraps,
+	wrapAlignments
+};
+
+function instance$k($$self, $$props, $$invalidate) {
+	let classes = ["uk-flex"];
+	let { inline = false } = $$props;
+	if (inline) classes.push("uk-flex-inline");
+	let { justification = "" } = $$props;
+	if (justifications.includes(justification.toLowerCase())) classes.push("uk-flex-" + justification);
+	let { alignment = "" } = $$props;
+	if (alignments.includes(alignment.toLowerCase())) classes.push("uk-flex-" + alignment);
+	let { direction = "" } = $$props;
+	if (directions.includes(direction.toLowerCase())) classes.push("uk-flex-" + direction);
+	let { wrap = "" } = $$props;
+	let { wrapAlignment = "" } = $$props;
+
+	if (wraps.includes(wrap.toLowerCase())) {
+		classes.push("uk-flex-" + wrap);
+		if (wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-" + wrapAlignment);
+	}
+
+	let { class: _class = "" } = $$props;
+	let { width } = $$props;
+	let { element } = $$props;
+	classes = classes.map(c => c.toLowerCase());
+	let { $$slots = {}, $$scope } = $$props;
+
+	function div_binding($$value) {
+		binding_callbacks[$$value ? "unshift" : "push"](() => {
+			element = $$value;
+			$$invalidate(0, element);
+		});
+	}
+
+	$$self.$set = $$props => {
+		if ("inline" in $$props) $$invalidate(4, inline = $$props.inline);
+		if ("justification" in $$props) $$invalidate(5, justification = $$props.justification);
+		if ("alignment" in $$props) $$invalidate(6, alignment = $$props.alignment);
+		if ("direction" in $$props) $$invalidate(7, direction = $$props.direction);
+		if ("wrap" in $$props) $$invalidate(8, wrap = $$props.wrap);
+		if ("wrapAlignment" in $$props) $$invalidate(9, wrapAlignment = $$props.wrapAlignment);
+		if ("class" in $$props) $$invalidate(1, _class = $$props.class);
+		if ("width" in $$props) $$invalidate(2, width = $$props.width);
+		if ("element" in $$props) $$invalidate(0, element = $$props.element);
+		if ("$$scope" in $$props) $$invalidate(10, $$scope = $$props.$$scope);
+	};
+
+	return [
+		element,
+		_class,
+		width,
+		classes,
+		inline,
+		justification,
+		alignment,
+		direction,
+		wrap,
+		wrapAlignment,
+		$$scope,
+		$$slots,
+		div_binding
+	];
+}
+
+class Flex extends SvelteComponent {
+	constructor(options) {
+		super();
+
+		init(this, options, instance$k, create_fragment$k, safe_not_equal, {
+			inline: 4,
+			justification: 5,
+			alignment: 6,
+			direction: 7,
+			wrap: 8,
+			wrapAlignment: 9,
+			class: 1,
+			width: 2,
+			element: 0
+		});
+	}
+}
+
+/* src/Utility/Inline.svelte generated by Svelte v3.24.0 */
+
+function create_fragment$l(ctx) {
 	let div;
 	let current;
 	const default_slot_template = /*$$slots*/ ctx[2].default;
@@ -16553,7 +17003,7 @@ function create_fragment$i(ctx) {
 	};
 }
 
-function instance$i($$self, $$props, $$invalidate) {
+function instance$l($$self, $$props, $$invalidate) {
 	let { clip = false } = $$props;
 	let { $$slots = {}, $$scope } = $$props;
 
@@ -16568,7 +17018,82 @@ function instance$i($$self, $$props, $$invalidate) {
 class Inline extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance$i, create_fragment$i, safe_not_equal, { clip: 0 });
+		init(this, options, instance$l, create_fragment$l, safe_not_equal, { clip: 0 });
+	}
+}
+
+/* src/Tile/Tile.svelte generated by Svelte v3.24.0 */
+
+function create_fragment$m(ctx) {
+	let div;
+	let div_class_value;
+	let current;
+	const default_slot_template = /*$$slots*/ ctx[3].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
+
+	return {
+		c() {
+			div = element("div");
+			if (default_slot) default_slot.c();
+			attr(div, "class", div_class_value = /*classes*/ ctx[0].join(" "));
+		},
+		m(target, anchor) {
+			insert(target, div, anchor);
+
+			if (default_slot) {
+				default_slot.m(div, null);
+			}
+
+			current = true;
+		},
+		p(ctx, [dirty]) {
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 4) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[2], dirty, null, null);
+				}
+			}
+		},
+		i(local) {
+			if (current) return;
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+			if (default_slot) default_slot.d(detaching);
+		}
+	};
+}
+
+const styles$2 = ["default", "muted", "primary", "secondary"];
+const tileOptions = { styles: styles$2 };
+
+function instance$m($$self, $$props, $$invalidate) {
+	let classes = ["uk-tile"];
+	let { style = "" } = $$props;
+
+	if (styles$2.includes(style.toLowerCase())) {
+		classes.push("uk-tile-" + style.toLowerCase());
+	}
+
+	let { $$slots = {}, $$scope } = $$props;
+
+	$$self.$set = $$props => {
+		if ("style" in $$props) $$invalidate(1, style = $$props.style);
+		if ("$$scope" in $$props) $$invalidate(2, $$scope = $$props.$$scope);
+	};
+
+	return [classes, style, $$scope, $$slots];
+}
+
+class Tile extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$m, create_fragment$m, safe_not_equal, { style: 1 });
 	}
 }
 
@@ -16739,4 +17264,4 @@ const uk_animate = (node, params) => {
     };
 };
 
-export { Accordion, AccordionItem, Alert, Article, Badge, Breadcrumb, BreadcrumbItem, Button, ButtonGroup, Card, Column, Comment, CommentList, Container, Countdown, Divider, Drop, Dropdown, Inline, uk_animate, uk_width };
+export { Accordion, AccordionItem, Alert, Article, Badge, Breadcrumb, BreadcrumbItem, Button, ButtonGroup, Card, Column, Comment, CommentList, Container, Countdown, Divider, Drop, Dropdown, Filter, FilterControl, Flex, Inline, Tile, alertOptions, buttonOptions, cardOptions, flexOptions, tileOptions, uk_animate, uk_width };
