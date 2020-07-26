@@ -17027,15 +17027,18 @@ class Inline extends SvelteComponent {
 function create_fragment$m(ctx) {
 	let div;
 	let div_class_value;
+	let uk_width_action;
 	let current;
-	const default_slot_template = /*$$slots*/ ctx[3].default;
-	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[2], null);
+	let mounted;
+	let dispose;
+	const default_slot_template = /*$$slots*/ ctx[5].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
 
 	return {
 		c() {
 			div = element("div");
 			if (default_slot) default_slot.c();
-			attr(div, "class", div_class_value = /*classes*/ ctx[0].join(" "));
+			attr(div, "class", div_class_value = /*classes*/ ctx[2].join(" ") + " " + /*_class*/ ctx[1]);
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);
@@ -17045,13 +17048,24 @@ function create_fragment$m(ctx) {
 			}
 
 			current = true;
+
+			if (!mounted) {
+				dispose = action_destroyer(uk_width_action = uk_width.call(null, div, /*width*/ ctx[0]));
+				mounted = true;
+			}
 		},
 		p(ctx, [dirty]) {
 			if (default_slot) {
-				if (default_slot.p && dirty & /*$$scope*/ 4) {
-					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[2], dirty, null, null);
+				if (default_slot.p && dirty & /*$$scope*/ 16) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[4], dirty, null, null);
 				}
 			}
+
+			if (!current || dirty & /*_class*/ 2 && div_class_value !== (div_class_value = /*classes*/ ctx[2].join(" ") + " " + /*_class*/ ctx[1])) {
+				attr(div, "class", div_class_value);
+			}
+
+			if (uk_width_action && is_function(uk_width_action.update) && dirty & /*width*/ 1) uk_width_action.update.call(null, /*width*/ ctx[0]);
 		},
 		i(local) {
 			if (current) return;
@@ -17065,6 +17079,8 @@ function create_fragment$m(ctx) {
 		d(detaching) {
 			if (detaching) detach(div);
 			if (default_slot) default_slot.d(detaching);
+			mounted = false;
+			dispose();
 		}
 	};
 }
@@ -17078,22 +17094,28 @@ function instance$m($$self, $$props, $$invalidate) {
 
 	if (styles$2.includes(style.toLowerCase())) {
 		classes.push("uk-tile-" + style.toLowerCase());
+	} else {
+		classes.push("uk-tile-default");
 	}
 
+	let { width = "" } = $$props;
+	let { class: _class = "" } = $$props;
 	let { $$slots = {}, $$scope } = $$props;
 
 	$$self.$set = $$props => {
-		if ("style" in $$props) $$invalidate(1, style = $$props.style);
-		if ("$$scope" in $$props) $$invalidate(2, $$scope = $$props.$$scope);
+		if ("style" in $$props) $$invalidate(3, style = $$props.style);
+		if ("width" in $$props) $$invalidate(0, width = $$props.width);
+		if ("class" in $$props) $$invalidate(1, _class = $$props.class);
+		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
 	};
 
-	return [classes, style, $$scope, $$slots];
+	return [width, _class, classes, style, $$scope, $$slots];
 }
 
 class Tile extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance$m, create_fragment$m, safe_not_equal, { style: 1 });
+		init(this, options, instance$m, create_fragment$m, safe_not_equal, { style: 3, width: 0, class: 1 });
 	}
 }
 
