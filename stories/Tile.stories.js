@@ -13,7 +13,8 @@ export const Main = () => ({
     Component: TileView,
     props: {
         props: {
-            style: select("Style", ["", ...tileOptions.styles], ""),
+            style: select("Style", [...tileOptions.styles], ""),
+            width: select("Width", ["", ...validWidths], "")
         },
 
     }
