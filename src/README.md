@@ -17,5 +17,6 @@
 - [Drop](Drop#drop)
 - [Dropdown](Dropdown#dropdown)
 - [Flex](Flex#flex)
+- [Section](Section#section)
 - [Tile](Tile#tile)
 - [Width](helpers#width)
