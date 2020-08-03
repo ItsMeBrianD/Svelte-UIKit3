@@ -35,6 +35,12 @@ export {default as FilterControl} from "./Filter/FilterControl.svelte";
 
 export {default as Flex, flexOptions} from "./Flex/Flex.svelte";
 
+export {default as Form} from "./Form/Form.svelte";
+export {default as Input} from "./Form/Input.svelte";
+export {default as Label} from "./Form/Label.svelte";
+export {inputOptions} from "./Form";
+
+
 export {default as Inline} from "./Utility/Inline.svelte";
 
 export {default as List, listOptions} from "./List/List.svelte";
