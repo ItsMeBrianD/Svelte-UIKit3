@@ -2,6 +2,7 @@
   "name": "svelte-uikit3",
   "description": "A Svelte Wrapper for UIkit3",
   "version": "0.1.1",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
