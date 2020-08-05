@@ -14089,6 +14089,10 @@
     				$$invalidate(3, classes = [...classes]);
     			}
     		}
+
+    		if ($$self.$$.dirty & /*classes*/ 8) {
+    			 console.log(classes);
+    		}
     	};
 
     	return [

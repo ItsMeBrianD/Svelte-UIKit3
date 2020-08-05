@@ -14083,6 +14083,10 @@ function instance$7($$self, $$props, $$invalidate) {
 				$$invalidate(3, classes = [...classes]);
 			}
 		}
+
+		if ($$self.$$.dirty & /*classes*/ 8) {
+			 console.log(classes);
+		}
 	};
 
 	return [
