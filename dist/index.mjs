@@ -14079,6 +14079,8 @@ function instance$7($$self, $$props, $$invalidate) {
 				if (sizes.includes(size.toLowerCase())) {
 					classes.push("uk-button-" + size.toLowerCase());
 				}
+
+				$$invalidate(3, classes = [...classes]);
 			}
 		}
 	};
