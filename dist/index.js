@@ -12907,7 +12907,7 @@
     	};
     }
 
-    // (43:14)              
+    // (47:14)              
     function fallback_block$1(ctx) {
     	let p;
 
@@ -13003,7 +13003,7 @@
     				}
     			}
 
-    			if (!current || dirty & /*_class*/ 8 && div0_class_value !== (div0_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[3])) {
+    			if (!current || dirty & /*classes, _class*/ 136 && div0_class_value !== (div0_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[3])) {
     				attr(div0, "class", div0_class_value);
     			}
 
@@ -13037,7 +13037,6 @@
     	let { showClose = false } = $$props;
     	let { largeClose = false } = $$props;
     	let { style = "" } = $$props;
-    	if (styles.includes(style.toLowerCase())) classes.push("uk-alert-" + style);
     	let { width = "" } = $$props;
     	let { class: _class = "" } = $$props;
     	let { title = "" } = $$props;
@@ -13076,6 +13075,14 @@
     	};
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*style, classes*/ 384) {
+    			 {
+    				$$invalidate(7, classes = []);
+    				if (styles.includes(style.toLowerCase())) classes.push("uk-alert-" + style);
+    				$$invalidate(7, classes = [...classes]);
+    			}
+    		}
+
     		if ($$self.$$.dirty & /*element*/ 32) {
     			 if (element) {
     				uikit.alert(element, options);
@@ -13149,7 +13156,7 @@
     const get_header_slot_changes = dirty => ({});
     const get_header_slot_context = ctx => ({});
 
-    // (27:31)                  
+    // (31:31)                  
     function fallback_block_4(ctx) {
     	let t;
 
@@ -13169,7 +13176,7 @@
     	};
     }
 
-    // (25:24)          
+    // (29:24)          
     function fallback_block_3(ctx) {
     	let h2;
     	let current;
@@ -13219,7 +13226,7 @@
     	};
     }
 
-    // (33:26)              
+    // (37:26)              
     function fallback_block_2(ctx) {
     	let t;
 
@@ -13239,7 +13246,7 @@
     	};
     }
 
-    // (38:26)              
+    // (42:26)              
     function fallback_block_1(ctx) {
     	let t;
 
@@ -13259,7 +13266,7 @@
     	};
     }
 
-    // (42:10)          
+    // (46:10)          
     function fallback_block$2(ctx) {
     	let p;
     	let t;
@@ -13398,7 +13405,7 @@
     				}
     			}
 
-    			if (!current || dirty & /*_class*/ 16 && article_class_value !== (article_class_value = "uk-article " + /*_class*/ ctx[4] + " " + /*classes*/ ctx[6].join(" "))) {
+    			if (!current || dirty & /*_class, classes*/ 80 && article_class_value !== (article_class_value = "uk-article " + /*_class*/ ctx[4] + " " + /*classes*/ ctx[6].join(" "))) {
     				attr(article, "class", article_class_value);
     			}
 
@@ -13439,12 +13446,6 @@
     	let { class: _class } = $$props, classes = [];
     	let { width = "" } = $$props;
     	let { backgroundColor = "" } = $$props;
-    	classes.push(getBackgroundColorClass(backgroundColor));
-
-    	if (backgroundColor === "primary" || backgroundColor === "secondary") {
-    		classes.push("uk-light");
-    	}
-
     	let { $$slots = {}, $$scope } = $$props;
 
     	$$self.$set = $$props => {
@@ -13456,6 +13457,21 @@
     		if ("width" in $$props) $$invalidate(5, width = $$props.width);
     		if ("backgroundColor" in $$props) $$invalidate(7, backgroundColor = $$props.backgroundColor);
     		if ("$$scope" in $$props) $$invalidate(8, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*classes, backgroundColor*/ 192) {
+    			 {
+    				$$invalidate(6, classes = []);
+    				classes.push(getBackgroundColorClass(backgroundColor));
+
+    				if (backgroundColor === "primary" || backgroundColor === "secondary") {
+    					classes.push("uk-light");
+    				}
+
+    				$$invalidate(6, classes = [...classes]);
+    			}
+    		}
     	};
 
     	return [
@@ -14216,7 +14232,7 @@
     const get_header_slot_changes$1 = dirty => ({});
     const get_header_slot_context$1 = ctx => ({});
 
-    // (43:28)              
+    // (49:28)              
     function fallback_block_1$2(ctx) {
     	let div;
 
@@ -14236,7 +14252,7 @@
     	};
     }
 
-    // (56:4) {#if badge}
+    // (62:4) {#if badge}
     function create_if_block$2(ctx) {
     	let badge_1;
     	let current;
@@ -14273,7 +14289,7 @@
     	};
     }
 
-    // (61:28)              
+    // (67:28)              
     function fallback_block$6(ctx) {
     	let div;
 
@@ -14338,14 +14354,14 @@
     			div3 = element("div");
     			if (footer_slot_or_fallback) footer_slot_or_fallback.c();
     			attr(div0, "class", "uk-margin-small-bottom uk-padding-remove-horizontal");
-    			toggle_class(div0, "uk-card-header", !/*headerElement*/ ctx[5]);
-    			toggle_class(div0, "uk-hidden", /*headerElement*/ ctx[5]);
+    			toggle_class(div0, "uk-card-header", !/*headerElement*/ ctx[6]);
+    			toggle_class(div0, "uk-hidden", /*headerElement*/ ctx[6]);
     			attr(h3, "class", "uk-card-title uk-margin-remove");
-    			toggle_class(div1, "uk-hidden", !/*headerElement*/ ctx[5]);
+    			toggle_class(div1, "uk-hidden", !/*headerElement*/ ctx[6]);
     			toggle_class(div1, "uk-card-header", /*titleIsHeader*/ ctx[1]);
     			attr(div2, "class", "uk-margin-small-top");
-    			toggle_class(div3, "uk-card-footer", !/*footerElement*/ ctx[6]);
-    			attr(div4, "class", div4_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[4]);
+    			toggle_class(div3, "uk-card-footer", !/*footerElement*/ ctx[7]);
+    			attr(div4, "class", div4_class_value = /*classes*/ ctx[5].join(" ") + " " + /*_class*/ ctx[4]);
     		},
     		m(target, anchor) {
     			insert(target, div4, anchor);
@@ -14388,23 +14404,23 @@
     					update_slot(header_slot, header_slot_template, ctx, /*$$scope*/ ctx[11], dirty, get_header_slot_changes$1, get_header_slot_context$1);
     				}
     			} else {
-    				if (header_slot_or_fallback && header_slot_or_fallback.p && dirty & /*headerElement*/ 32) {
+    				if (header_slot_or_fallback && header_slot_or_fallback.p && dirty & /*headerElement*/ 64) {
     					header_slot_or_fallback.p(ctx, dirty);
     				}
     			}
 
-    			if (dirty & /*headerElement*/ 32) {
-    				toggle_class(div0, "uk-card-header", !/*headerElement*/ ctx[5]);
+    			if (dirty & /*headerElement*/ 64) {
+    				toggle_class(div0, "uk-card-header", !/*headerElement*/ ctx[6]);
     			}
 
-    			if (dirty & /*headerElement*/ 32) {
-    				toggle_class(div0, "uk-hidden", /*headerElement*/ ctx[5]);
+    			if (dirty & /*headerElement*/ 64) {
+    				toggle_class(div0, "uk-hidden", /*headerElement*/ ctx[6]);
     			}
 
     			if (!current || dirty & /*title*/ 1) set_data(t1, /*title*/ ctx[0]);
 
-    			if (dirty & /*headerElement*/ 32) {
-    				toggle_class(div1, "uk-hidden", !/*headerElement*/ ctx[5]);
+    			if (dirty & /*headerElement*/ 64) {
+    				toggle_class(div1, "uk-hidden", !/*headerElement*/ ctx[6]);
     			}
 
     			if (dirty & /*titleIsHeader*/ 2) {
@@ -14445,16 +14461,16 @@
     					update_slot(footer_slot, footer_slot_template, ctx, /*$$scope*/ ctx[11], dirty, get_footer_slot_changes, get_footer_slot_context);
     				}
     			} else {
-    				if (footer_slot_or_fallback && footer_slot_or_fallback.p && dirty & /*footerElement*/ 64) {
+    				if (footer_slot_or_fallback && footer_slot_or_fallback.p && dirty & /*footerElement*/ 128) {
     					footer_slot_or_fallback.p(ctx, dirty);
     				}
     			}
 
-    			if (dirty & /*footerElement*/ 64) {
-    				toggle_class(div3, "uk-card-footer", !/*footerElement*/ ctx[6]);
+    			if (dirty & /*footerElement*/ 128) {
+    				toggle_class(div3, "uk-card-footer", !/*footerElement*/ ctx[7]);
     			}
 
-    			if (!current || dirty & /*_class*/ 16 && div4_class_value !== (div4_class_value = /*classes*/ ctx[7].join(" ") + " " + /*_class*/ ctx[4])) {
+    			if (!current || dirty & /*classes, _class*/ 48 && div4_class_value !== (div4_class_value = /*classes*/ ctx[5].join(" ") + " " + /*_class*/ ctx[4])) {
     				attr(div4, "class", div4_class_value);
     			}
 
@@ -14488,19 +14504,16 @@
     }
 
     const colors = ["default", "primary", "secondary"];
-    const cardOptions = { colors };
+    const sizes$1 = ["small", "large"];
+    const cardOptions = { colors, sizes: sizes$1 };
 
     function instance$9($$self, $$props, $$invalidate) {
     	let { title = "" } = $$props;
     	let { titleIsHeader = false } = $$props;
     	let classes = ["uk-card", "uk-card-body"];
     	let { color = "" } = $$props;
-    	if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color); else classes.push("uk-card-default");
     	let { size = "" } = $$props;
-    	let sizes = ["small", "large"];
-    	if (sizes.includes(size.toLowerCase())) classes.push("uk-card-" + size);
     	let { hover = false } = $$props;
-    	if (hover) classes.push("uk-card-hover");
     	let { badge = false } = $$props;
     	let { width = "" } = $$props;
     	let headerElement = false;
@@ -14511,14 +14524,14 @@
     	function div_binding($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
     			headerElement = $$value;
-    			$$invalidate(5, headerElement);
+    			$$invalidate(6, headerElement);
     		});
     	}
 
     	function div_binding_1($$value) {
     		binding_callbacks[$$value ? "unshift" : "push"](() => {
     			footerElement = $$value;
-    			$$invalidate(6, footerElement);
+    			$$invalidate(7, footerElement);
     		});
     	}
 
@@ -14534,15 +14547,27 @@
     		if ("$$scope" in $$props) $$invalidate(11, $$scope = $$props.$$scope);
     	};
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*color, classes, size, hover*/ 1824) {
+    			 {
+    				$$invalidate(5, classes = ["uk-card", "uk-card-body"]);
+    				if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color); else classes.push("uk-card-default");
+    				if (sizes$1.includes(size.toLowerCase())) classes.push("uk-card-" + size);
+    				if (hover) classes.push("uk-card-hover");
+    				$$invalidate(5, classes = [...classes]);
+    			}
+    		}
+    	};
+
     	return [
     		title,
     		titleIsHeader,
     		badge,
     		width,
     		_class,
+    		classes,
     		headerElement,
     		footerElement,
-    		classes,
     		color,
     		size,
     		hover,
@@ -15058,7 +15083,11 @@
     		m(target, anchor) {
     			insert(target, div, anchor);
     		},
-    		p: noop,
+    		p(ctx, [dirty]) {
+    			if (dirty & /*classes*/ 1 && div_class_value !== (div_class_value = /*classes*/ ctx[0].join(" "))) {
+    				attr(div, "class", div_class_value);
+    			}
+    		},
     		i: noop,
     		o: noop,
     		d(detaching) {
@@ -15067,17 +15096,26 @@
     	};
     }
 
+    const sizes$2 = ["xsmall", "small", "large", "xlarge", "expand"];
+
     function instance$d($$self, $$props, $$invalidate) {
     	let classes = ["uk-container"];
     	let { size = "" } = $$props;
-    	const sizes = ["xsmall", "small", "large", "xlarge", "expand"];
-
-    	if (sizes.includes(size.toLowerCase())) {
-    		classes.push("uk-container-" + size.toLowerCase());
-    	}
 
     	$$self.$set = $$props => {
     		if ("size" in $$props) $$invalidate(1, size = $$props.size);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*size, classes*/ 3) {
+    			 {
+    				$$invalidate(0, classes = ["uk-container"]);
+
+    				if (sizes$2.includes(size.toLowerCase())) {
+    					classes.push("uk-container-" + size.toLowerCase());
+    				}
+    			}
+    		}
     	};
 
     	return [classes, size];
@@ -16220,7 +16258,7 @@
     const get_handle_slot_changes = dirty => ({});
     const get_handle_slot_context = ctx => ({});
 
-    // (64:4) <Button>
+    // (72:4) <Button>
     function create_default_slot$1(ctx) {
     	let t;
 
@@ -16237,7 +16275,7 @@
     	};
     }
 
-    // (63:20)      
+    // (71:20)      
     function fallback_block_1$4(ctx) {
     	let button;
     	let current;
@@ -16281,7 +16319,7 @@
     	};
     }
 
-    // (69:10)          
+    // (78:10)          
     function fallback_block$9(ctx) {
     	let ul;
 
@@ -16399,70 +16437,37 @@
     	};
     }
 
+    const modes = ["hover", "click"];
+
+    const positions = [
+    	"bottom-left",
+    	"bottom-center",
+    	"bottom-right",
+    	"bottom-justify",
+    	"top-left",
+    	"top-center",
+    	"top-right",
+    	"top-justify",
+    	"left-top",
+    	"left-center",
+    	"left-bottom",
+    	"right-top",
+    	"right-center",
+    	"right-bottom"
+    ];
+
+    const flips = [true, false, "x", "y"];
+
     function instance$h($$self, $$props, $$invalidate) {
     	let options = {};
     	let { mode = "" } = $$props;
-    	const modes = ["hover", "click"];
-
-    	if (modes.includes(mode.toLowerCase())) {
-    		options.mode = mode.toLowerCase();
-    	}
-
     	let { position = "" } = $$props;
-
-    	const positions = [
-    		"bottom-left",
-    		"bottom-center",
-    		"bottom-right",
-    		"bottom-justify",
-    		"top-left",
-    		"top-center",
-    		"top-right",
-    		"top-justify",
-    		"left-top",
-    		"left-center",
-    		"left-bottom",
-    		"right-top",
-    		"right-center",
-    		"right-bottom"
-    	];
-
-    	if (positions.includes(position.toLowerCase())) {
-    		options.pos = position.toLowerCase();
-    	}
-
     	let { offset = false } = $$props;
-
-    	if (offset && typeof offset === "number") {
-    		options.offset = offset;
-    	}
-
     	let { delayShow = false } = $$props;
-
-    	if (delayShow && typeof delayShow === "number") {
-    		options.delayShow = delayShow;
-    	}
-
     	let { delayHide = false } = $$props;
-
-    	if (delayHide && typeof delayHide === "number") {
-    		options.delayHide = delayHide;
-    	}
-
     	let { boundary = false } = $$props;
-
-    	if (boundary) {
-    		options.boundary = boundary;
-    	}
-
     	let { boundaryAlign = false } = $$props;
-
-    	if (boundaryAlign) {
-    		options.boundaryAlign = boundaryAlign;
-    	}
-
     	let { flip = true } = $$props;
-    	const flips = [true, false, "x", "y"];
 
     	if (flips.includes(flip)) {
     		options.flip = flip;
@@ -16525,6 +16530,40 @@
     	};
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*mode, position, offset, delayShow, delayHide, boundary, boundaryAlign, options*/ 2097660) {
+    			 {
+    				if (modes.includes(mode.toLowerCase())) {
+    					$$invalidate(21, options.mode = mode.toLowerCase(), options);
+    				}
+
+    				if (positions.includes(position.toLowerCase())) {
+    					$$invalidate(21, options.pos = position.toLowerCase(), options);
+    				}
+
+    				if (offset && typeof offset === "number") {
+    					$$invalidate(21, options.offset = offset, options);
+    				}
+
+    				if (delayShow && typeof delayShow === "number") {
+    					$$invalidate(21, options.delayShow = delayShow, options);
+    				}
+
+    				if (delayHide && typeof delayHide === "number") {
+    					$$invalidate(21, options.delayHide = delayHide, options);
+    				}
+
+    				if (boundary) {
+    					$$invalidate(21, options.boundary = boundary, options);
+    				}
+
+    				if (boundaryAlign) {
+    					$$invalidate(21, options.boundaryAlign = boundaryAlign, options);
+    				}
+
+    				((((((($$invalidate(21, options), $$invalidate(2, mode)), $$invalidate(3, position)), $$invalidate(4, offset)), $$invalidate(5, delayShow)), $$invalidate(6, delayHide)), $$invalidate(7, boundary)), $$invalidate(8, boundaryAlign));
+    			}
+    		}
+
     		if ($$self.$$.dirty & /*dropdownElem, options*/ 2097154) {
     			 if (dropdownElem) {
     				uikit.dropdown(dropdownElem, options);
@@ -16890,21 +16929,11 @@
     function instance$k($$self, $$props, $$invalidate) {
     	let classes = ["uk-flex"];
     	let { inline = false } = $$props;
-    	if (inline) classes.push("uk-flex-inline");
     	let { justification = "" } = $$props;
-    	if (justifications.includes(justification.toLowerCase())) classes.push("uk-flex-" + justification);
     	let { alignment = "" } = $$props;
-    	if (alignments.includes(alignment.toLowerCase())) classes.push("uk-flex-" + alignment);
     	let { direction = "" } = $$props;
-    	if (directions.includes(direction.toLowerCase())) classes.push("uk-flex-" + direction);
     	let { wrap = "" } = $$props;
     	let { wrapAlignment = "" } = $$props;
-
-    	if (wraps.includes(wrap.toLowerCase())) {
-    		classes.push("uk-flex-" + wrap);
-    		if (wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-" + wrapAlignment);
-    	}
-
     	let { class: _class = "" } = $$props;
     	let { width } = $$props;
     	let { element } = $$props;
@@ -16929,6 +16958,25 @@
     		if ("width" in $$props) $$invalidate(2, width = $$props.width);
     		if ("element" in $$props) $$invalidate(0, element = $$props.element);
     		if ("$$scope" in $$props) $$invalidate(10, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*inline, classes, justification, alignment, direction, wrap, wrapAlignment*/ 1016) {
+    			 {
+    				$$invalidate(3, classes = ["uk-flex"]);
+    				if (inline) classes.push("uk-flex-inline");
+    				if (justifications.includes(justification.toLowerCase())) classes.push("uk-flex-" + justification);
+    				if (alignments.includes(alignment.toLowerCase())) classes.push("uk-flex-" + alignment);
+    				if (directions.includes(direction.toLowerCase())) classes.push("uk-flex-" + direction);
+
+    				if (wraps.includes(wrap.toLowerCase())) {
+    					classes.push("uk-flex-" + wrap);
+    					if (wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-" + wrapAlignment);
+    				}
+
+    				$$invalidate(3, classes = [...classes]);
+    			}
+    		}
     	};
 
     	return [
@@ -17069,11 +17117,15 @@
     				}
     			}
 
-    			if (dirty & /*divider*/ 1) {
+    			if (!current || dirty & /*classes*/ 4 && ul_class_value !== (ul_class_value = /*classes*/ ctx[2].join(" "))) {
+    				attr(ul, "class", ul_class_value);
+    			}
+
+    			if (dirty & /*classes, divider*/ 5) {
     				toggle_class(ul, "uk-list-divider", /*divider*/ ctx[0]);
     			}
 
-    			if (dirty & /*striped*/ 2) {
+    			if (dirty & /*classes, striped*/ 6) {
     				toggle_class(ul, "uk-list-striped", /*striped*/ ctx[1]);
     			}
     		},
@@ -17095,29 +17147,14 @@
 
     const styles$2 = ["circle", "decimal", "disc", "hyphen", "square"];
     const colors$1 = ["muted", "emphasis", "primary", "secondary"];
-    const sizes$1 = ["large", "collapse"];
-    const listOptions = { styles: styles$2, colors: colors$1, sizes: sizes$1 };
+    const sizes$3 = ["large", "collapse"];
+    const listOptions = { styles: styles$2, colors: colors$1, sizes: sizes$3 };
 
     function instance$m($$self, $$props, $$invalidate) {
     	let classes = ["uk-list"];
     	let { style = "" } = $$props;
-
-    	if (styles$2.includes(style.toLowerCase())) {
-    		classes.push("uk-list-" + style.toLowerCase());
-    	}
-
     	let { color = "" } = $$props;
-
-    	if (colors$1.includes(color.toLowerCase())) {
-    		classes.push("uk-list-" + color.toLowerCase());
-    	}
-
     	let { size = "" } = $$props;
-
-    	if (sizes$1.includes(size.toLowerCase())) {
-    		classes.push("uk-list-" + size.toLowerCase());
-    	}
-
     	let { divider = false } = $$props;
     	let { striped = false } = $$props;
     	let { $$slots = {}, $$scope } = $$props;
@@ -17129,6 +17166,28 @@
     		if ("divider" in $$props) $$invalidate(0, divider = $$props.divider);
     		if ("striped" in $$props) $$invalidate(1, striped = $$props.striped);
     		if ("$$scope" in $$props) $$invalidate(6, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*style, classes, color, size*/ 60) {
+    			 {
+    				$$invalidate(2, classes = ["uk-list"]);
+
+    				if (styles$2.includes(style.toLowerCase())) {
+    					classes.push("uk-list-" + style.toLowerCase());
+    				}
+
+    				if (colors$1.includes(color.toLowerCase())) {
+    					classes.push("uk-list-" + color.toLowerCase());
+    				}
+
+    				if (sizes$3.includes(size.toLowerCase())) {
+    					classes.push("uk-list-" + size.toLowerCase());
+    				}
+
+    				$$invalidate(2, classes = [...classes]);
+    			}
+    		}
     	};
 
     	return [divider, striped, classes, style, color, size, $$scope, $$slots];
@@ -17187,7 +17246,7 @@
     				}
     			}
 
-    			if (!current || dirty & /*_class*/ 2 && div_class_value !== (div_class_value = /*classes*/ ctx[2].join(" ") + " " + /*_class*/ ctx[1])) {
+    			if (!current || dirty & /*classes, _class*/ 6 && div_class_value !== (div_class_value = /*classes*/ ctx[2].join(" ") + " " + /*_class*/ ctx[1])) {
     				attr(div, "class", div_class_value);
     			}
 
@@ -17217,13 +17276,6 @@
     function instance$n($$self, $$props, $$invalidate) {
     	let classes = ["uk-tile"];
     	let { style = "" } = $$props;
-
-    	if (styles$3.includes(style.toLowerCase())) {
-    		classes.push("uk-tile-" + style.toLowerCase());
-    	} else {
-    		classes.push("uk-tile-default");
-    	}
-
     	let { width = "" } = $$props;
     	let { class: _class = "" } = $$props;
     	let { $$slots = {}, $$scope } = $$props;
@@ -17233,6 +17285,22 @@
     		if ("width" in $$props) $$invalidate(0, width = $$props.width);
     		if ("class" in $$props) $$invalidate(1, _class = $$props.class);
     		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*style, classes*/ 12) {
+    			 {
+    				$$invalidate(2, classes = ["uk-tile"]);
+
+    				if (styles$3.includes(style.toLowerCase())) {
+    					classes.push("uk-tile-" + style.toLowerCase());
+    				} else {
+    					classes.push("uk-tile-default");
+    				}
+
+    				$$invalidate(2, classes = [...classes]);
+    			}
+    		}
     	};
 
     	return [width, _class, classes, style, $$scope, $$slots];
