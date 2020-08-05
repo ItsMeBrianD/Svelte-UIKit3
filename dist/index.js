@@ -14019,9 +14019,21 @@
 
     function instance$7($$self, $$props, $$invalidate) {
     	let { text = "" } = $$props;
-    	let classes = ["uk-button"];
     	let { style = "" } = $$props;
     	let { size = "" } = $$props;
+    	let classes = ["uk-button"];
+
+    	if (styles$1.includes(style.toLowerCase())) {
+    		classes.push("uk-button-" + style.toLowerCase());
+    	} else {
+    		classes.push("uk-button-default");
+    	}
+
+    	if (sizes.includes(size.toLowerCase())) {
+    		classes.push("uk-button-" + size.toLowerCase());
+    	}
+
+    	classes = [...classes];
     	let { width = "" } = $$props;
     	let { class: _class = "" } = $$props;
     	let { $$slots = {}, $$scope } = $$props;
@@ -14072,24 +14084,6 @@
     	};
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*style, classes, size*/ 56) {
-    			 {
-    				$$invalidate(3, classes = ["uk-button"]);
-
-    				if (styles$1.includes(style.toLowerCase())) {
-    					classes.push("uk-button-" + style.toLowerCase());
-    				} else {
-    					classes.push("uk-button-default");
-    				}
-
-    				if (sizes.includes(size.toLowerCase())) {
-    					classes.push("uk-button-" + size.toLowerCase());
-    				}
-
-    				$$invalidate(3, classes = [...classes]);
-    			}
-    		}
-
     		if ($$self.$$.dirty & /*classes*/ 8) {
     			 console.log(classes);
     		}
