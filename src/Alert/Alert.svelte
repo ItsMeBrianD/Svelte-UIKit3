@@ -17,7 +17,11 @@
     export let largeClose = false;
 
     export let style = "";
-    if (styles.includes(style.toLowerCase())) classes.push("uk-alert-" + style);
+    $: {
+        classes = [];
+        if (styles.includes(style.toLowerCase())) classes.push("uk-alert-" + style);
+        classes = [...classes];
+    }
 
     $: if (element) {
         uikit.alert(element, options);

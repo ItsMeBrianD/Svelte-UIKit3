@@ -1,7 +1,9 @@
 <script context="module">
     const colors = ["default", "primary", "secondary"];
+    const sizes = ["small", "large"];
     export const cardOptions = {
-        colors
+        colors,
+        sizes
     }
 </script>
 
@@ -14,15 +16,19 @@
     let classes = ["uk-card", "uk-card-body"];
 
     export let color = "";
-    if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color);
-    else classes.push("uk-card-default");
+    $: {
+        classes = ["uk-card", "uk-card-body"];
+        if (colors.includes(color.toLowerCase())) classes.push("uk-card-" + color);
+        else classes.push("uk-card-default");
+        if (sizes.includes(size.toLowerCase())) classes.push("uk-card-" + size);
+        if (hover) classes.push("uk-card-hover");
+        classes = [...classes];
+    }
 
     export let size = "";
-    let sizes = ["small", "large"];
-    if (sizes.includes(size.toLowerCase())) classes.push("uk-card-" + size);
+
 
     export let hover = false;
-    if (hover) classes.push("uk-card-hover");
 
     export let badge = false;
 

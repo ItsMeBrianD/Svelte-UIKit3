@@ -30,28 +30,27 @@
     let classes = ["uk-list"];
 
     export let style = "";
-    if(styles.includes(style.toLowerCase())){
-        classes.push("uk-list-" + style.toLowerCase())
-    }
-
     export let color = "";
-    if(colors.includes(color.toLowerCase())){
-        classes.push("uk-list-" + color.toLowerCase());
-    }
-
     export let size = "";
-    if(sizes.includes(size.toLowerCase())){
-        classes.push("uk-list-" + size.toLowerCase());
-    }
-
     export let divider = false;
     export let striped = false;
 
+    $: {
+        classes = ["uk-list"];
+        if (styles.includes(style.toLowerCase())) {
+            classes.push("uk-list-" + style.toLowerCase())
+        }
+        if (colors.includes(color.toLowerCase())) {
+            classes.push("uk-list-" + color.toLowerCase());
+        }
+        if (sizes.includes(size.toLowerCase())) {
+            classes.push("uk-list-" + size.toLowerCase());
+        }
+        classes = [...classes];
+    }
+
 </script>
 
-<ul class={classes.join(" ")}
-    class:uk-list-divider={divider}
-    class:uk-list-striped={striped}
->
+<ul class={classes.join(" ")} class:uk-list-divider={divider} class:uk-list-striped={striped}>
     <slot/>
 </ul>

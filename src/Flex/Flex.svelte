@@ -18,22 +18,22 @@
     let classes = ["uk-flex"];
 
     export let inline = false;
-    if(inline) classes.push("uk-flex-inline");
-
     export let justification = "";
-    if(justifications.includes(justification.toLowerCase())) classes.push("uk-flex-" + justification);
-
     export let alignment = "";
-    if(alignments.includes(alignment.toLowerCase())) classes.push("uk-flex-" + alignment);
-
     export let direction = "";
-    if(directions.includes(direction.toLowerCase())) classes.push("uk-flex-" + direction);
-
     export let wrap = "";
     export let wrapAlignment = "";
-    if(wraps.includes(wrap.toLowerCase())) {
-        classes.push("uk-flex-" + wrap);
-        if(wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-"+wrapAlignment);
+    $: {
+        classes = ["uk-flex"];
+        if(inline) classes.push("uk-flex-inline");
+        if(justifications.includes(justification.toLowerCase())) classes.push("uk-flex-" + justification);
+        if(alignments.includes(alignment.toLowerCase())) classes.push("uk-flex-" + alignment);
+        if(directions.includes(direction.toLowerCase())) classes.push("uk-flex-" + direction);
+        if(wraps.includes(wrap.toLowerCase())) {
+            classes.push("uk-flex-" + wrap);
+            if(wrapAlignments.includes(wrapAlignment.toLowerCase())) classes.push("uk-flex-wrap-"+wrapAlignment);
+        }
+        classes = [...classes];
     }
 
     let _class = "";

@@ -13,9 +13,13 @@
     export let width = "";
 
     export let backgroundColor = "";
-    classes.push(getBackgroundColorClass(backgroundColor));
-    if(backgroundColor === "primary" || backgroundColor === "secondary"){
-        classes.push("uk-light");
+    $: {
+        classes = [];
+        classes.push(getBackgroundColorClass(backgroundColor));
+        if(backgroundColor === "primary" || backgroundColor === "secondary"){
+            classes.push("uk-light");
+        }
+        classes = [...classes];
     }
 
 </script>

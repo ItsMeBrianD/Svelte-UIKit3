@@ -1,3 +1,19 @@
+<script context="module">
+    const modes = ["hover", "click"];
+    const positions = [
+        "bottom-left", "bottom-center", "bottom-right", "bottom-justify",
+        "top-left", "top-center", "top-right", "top-justify",
+        "left-top", "left-center", "left-bottom",
+        "right-top", "right-center", "right-bottom"
+    ];
+    const flips = [true, false, "x", "y"];
+    export const dropdownOptions = {
+        modes,
+        positions,
+        flips
+    }
+</script>
+
 <script>
     import Button from "../Button/Button.svelte";
     import uikit from 'uikit';
@@ -5,54 +21,46 @@
     let options = {};
 
     export let mode = "";
-    const modes = ["hover", "click"];
-    if (modes.includes(mode.toLowerCase())) {
-        options.mode = mode.toLowerCase();
-    }
-
     export let position = "";
-    const positions = [
-        "bottom-left", "bottom-center", "bottom-right", "bottom-justify",
-        "top-left", "top-center", "top-right", "top-justify",
-        "left-top", "left-center", "left-bottom",
-        "right-top", "right-center", "right-bottom"
-    ];
-    if(positions.includes(position.toLowerCase())){
-        options.pos = position.toLowerCase();
-    }
-
     export let offset = false;
-    if(offset && typeof offset === "number"){
-        options.offset = offset;
-    }
-
     export let delayShow = false;
-    if(delayShow && typeof delayShow === "number"){
-        options.delayShow = delayShow;
-    }
-
     export let delayHide = false;
-    if(delayHide && typeof delayHide === "number"){
-        options.delayHide = delayHide;
-    }
-
     export let boundary = false;
-    if(boundary){
-        options.boundary = boundary;
-    }
     export let boundaryAlign = false;
-    if(boundaryAlign){
-        options.boundaryAlign = boundaryAlign;
+    export let flip = true;
+
+    $: {
+        if (modes.includes(mode.toLowerCase())) {
+            options.mode = mode.toLowerCase();
+        }
+        if (positions.includes(position.toLowerCase())) {
+            options.pos = position.toLowerCase();
+        }
+        if (offset && typeof offset === "number") {
+            options.offset = offset;
+        }
+        if (delayShow && typeof delayShow === "number") {
+            options.delayShow = delayShow;
+        }
+        if (delayHide && typeof delayHide === "number") {
+            options.delayHide = delayHide;
+        }
+        if (boundary) {
+            options.boundary = boundary;
+        }
+        if (boundaryAlign) {
+            options.boundaryAlign = boundaryAlign;
+        }
+        options = options;
     }
 
-    export let flip = true;
-    const flips = [true,false,"x","y"];
-    if(flips.includes(flip)){
+
+    if (flips.includes(flip)) {
         options.flip = flip;
     }
 
     let dropdownElem;
-    $: if(dropdownElem) {
+    $: if (dropdownElem) {
         uikit.dropdown(dropdownElem, options);
     }
 
@@ -65,7 +73,8 @@
         🖖
     </Button>
 </slot>
-<div bind:this={dropdownElem} on:toggle on:beforeshow on:show on:shown on:beforehide on:hide on:hidden on:stack class={_class}>
+<div bind:this={dropdownElem} on:toggle on:beforeshow on:show on:shown on:beforehide on:hide on:hidden on:stack
+     class={_class}>
     <slot>
         <ul class="uk-nav uk-dropdown-nav">
             <li class="uk-active"><a href="/">Active</a></li>

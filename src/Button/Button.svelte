@@ -15,15 +15,19 @@
 
 
     export let style = "";
-    if (styles.includes(style.toLowerCase())) {
-        classes.push("uk-button-" + style.toLowerCase());
-    } else {
-        classes.push("uk-button-default");
-    }
-
     export let size = "";
-    if (sizes.includes(size.toLowerCase())) {
-        classes.push("uk-button-" + size.toLowerCase());
+
+    $: {
+        classes = ["uk-button"];
+        if (styles.includes(style.toLowerCase())) {
+            classes.push("uk-button-" + style.toLowerCase());
+        } else {
+            classes.push("uk-button-default");
+        }
+        if (sizes.includes(size.toLowerCase())) {
+            classes.push("uk-button-" + size.toLowerCase());
+        }
+        classes = [...classes];
     }
 
     export let width = "";

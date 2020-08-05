@@ -11,10 +11,15 @@
     let classes = ["uk-tile"]
 
     export let style = "";
-    if(styles.includes(style.toLowerCase())){
-        classes.push("uk-tile-" + style.toLowerCase())
-    } else {
-        classes.push("uk-tile-default")
+    $: {
+        classes = ["uk-tile"];
+        if(styles.includes(style.toLowerCase())){
+            classes.push("uk-tile-" + style.toLowerCase())
+        } else {
+            classes.push("uk-tile-default")
+        }
+        classes = [...classes]
+
     }
 
     export let width = "";
