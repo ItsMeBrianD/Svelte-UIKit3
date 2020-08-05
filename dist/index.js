@@ -13989,7 +13989,7 @@
     				}
     			}
 
-    			if (!current || dirty & /*_class*/ 4 && button_class_value !== (button_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[2])) {
+    			if (!current || dirty & /*classes, _class*/ 12 && button_class_value !== (button_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[2])) {
     				attr(button, "class", button_class_value);
     			}
 
@@ -14021,19 +14021,7 @@
     	let { text = "" } = $$props;
     	let classes = ["uk-button"];
     	let { style = "" } = $$props;
-
-    	if (styles$1.includes(style.toLowerCase())) {
-    		classes.push("uk-button-" + style.toLowerCase());
-    	} else {
-    		classes.push("uk-button-default");
-    	}
-
     	let { size = "" } = $$props;
-
-    	if (sizes.includes(size.toLowerCase())) {
-    		classes.push("uk-button-" + size.toLowerCase());
-    	}
-
     	let { width = "" } = $$props;
     	let { class: _class = "" } = $$props;
     	let { $$slots = {}, $$scope } = $$props;
@@ -14081,6 +14069,24 @@
     		if ("width" in $$props) $$invalidate(1, width = $$props.width);
     		if ("class" in $$props) $$invalidate(2, _class = $$props.class);
     		if ("$$scope" in $$props) $$invalidate(6, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*style, classes, size*/ 56) {
+    			 {
+    				$$invalidate(3, classes = ["uk-button"]);
+
+    				if (styles$1.includes(style.toLowerCase())) {
+    					classes.push("uk-button-" + style.toLowerCase());
+    				} else {
+    					classes.push("uk-button-default");
+    				}
+
+    				if (sizes.includes(size.toLowerCase())) {
+    					classes.push("uk-button-" + size.toLowerCase());
+    				}
+    			}
+    		}
     	};
 
     	return [
