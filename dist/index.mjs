@@ -13952,15 +13952,16 @@ function create_fragment$7(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	const default_slot_template = /*$$slots*/ ctx[7].default;
-	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[6], null);
+	const default_slot_template = /*$$slots*/ ctx[8].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[7], null);
 	const default_slot_or_fallback = default_slot || fallback_block$5(ctx);
 
 	return {
 		c() {
 			button = element("button");
 			if (default_slot_or_fallback) default_slot_or_fallback.c();
-			attr(button, "class", button_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[2]);
+			attr(button, "class", button_class_value = /*classes*/ ctx[4].join(" ") + " " + /*_class*/ ctx[2]);
+			button.disabled = /*disabled*/ ctx[3];
 		},
 		m(target, anchor) {
 			insert(target, button, anchor);
@@ -13973,15 +13974,15 @@ function create_fragment$7(ctx) {
 
 			if (!mounted) {
 				dispose = [
-					listen(button, "focus", /*focus_handler*/ ctx[12]),
-					listen(button, "blur", /*blur_handler*/ ctx[9]),
-					listen(button, "focusin", /*focusin_handler*/ ctx[10]),
-					listen(button, "focusout", /*focusout_handler*/ ctx[11]),
-					listen(button, "click", /*click_handler*/ ctx[8]),
-					listen(button, "dblclick", /*dblclick_handler*/ ctx[13]),
-					listen(button, "mouseenter", /*mouseenter_handler*/ ctx[14]),
-					listen(button, "mouseleave", /*mouseleave_handler*/ ctx[15]),
-					listen(button, "auxclick", /*auxclick_handler*/ ctx[16]),
+					listen(button, "focus", /*focus_handler*/ ctx[14]),
+					listen(button, "blur", /*blur_handler*/ ctx[10]),
+					listen(button, "focusin", /*focusin_handler*/ ctx[11]),
+					listen(button, "focusout", /*focusout_handler*/ ctx[12]),
+					listen(button, "click", /*click_handler*/ ctx[13]),
+					listen(button, "dblclick", /*dblclick_handler*/ ctx[9]),
+					listen(button, "mouseenter", /*mouseenter_handler*/ ctx[15]),
+					listen(button, "mouseleave", /*mouseleave_handler*/ ctx[16]),
+					listen(button, "auxclick", /*auxclick_handler*/ ctx[17]),
 					action_destroyer(uk_width_action = uk_width.call(null, button, /*width*/ ctx[1]))
 				];
 
@@ -13990,8 +13991,8 @@ function create_fragment$7(ctx) {
 		},
 		p(ctx, [dirty]) {
 			if (default_slot) {
-				if (default_slot.p && dirty & /*$$scope*/ 64) {
-					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[6], dirty, null, null);
+				if (default_slot.p && dirty & /*$$scope*/ 128) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[7], dirty, null, null);
 				}
 			} else {
 				if (default_slot_or_fallback && default_slot_or_fallback.p && dirty & /*text*/ 1) {
@@ -13999,8 +14000,12 @@ function create_fragment$7(ctx) {
 				}
 			}
 
-			if (!current || dirty & /*classes, _class*/ 12 && button_class_value !== (button_class_value = /*classes*/ ctx[3].join(" ") + " " + /*_class*/ ctx[2])) {
+			if (!current || dirty & /*classes, _class*/ 20 && button_class_value !== (button_class_value = /*classes*/ ctx[4].join(" ") + " " + /*_class*/ ctx[2])) {
 				attr(button, "class", button_class_value);
+			}
+
+			if (!current || dirty & /*disabled*/ 8) {
+				button.disabled = /*disabled*/ ctx[3];
 			}
 
 			if (uk_width_action && is_function(uk_width_action.update) && dirty & /*width*/ 2) uk_width_action.update.call(null, /*width*/ ctx[1]);
@@ -14034,9 +14039,10 @@ function instance$7($$self, $$props, $$invalidate) {
 	let { size = "" } = $$props;
 	let { width = "" } = $$props;
 	let { class: _class = "" } = $$props;
+	let { disabled = false } = $$props;
 	let { $$slots = {}, $$scope } = $$props;
 
-	function click_handler(event) {
+	function dblclick_handler(event) {
 		bubble($$self, event);
 	}
 
@@ -14052,11 +14058,11 @@ function instance$7($$self, $$props, $$invalidate) {
 		bubble($$self, event);
 	}
 
-	function focus_handler(event) {
+	function click_handler(event) {
 		bubble($$self, event);
 	}
 
-	function dblclick_handler(event) {
+	function focus_handler(event) {
 		bubble($$self, event);
 	}
 
@@ -14074,17 +14080,18 @@ function instance$7($$self, $$props, $$invalidate) {
 
 	$$self.$set = $$props => {
 		if ("text" in $$props) $$invalidate(0, text = $$props.text);
-		if ("style" in $$props) $$invalidate(4, style = $$props.style);
-		if ("size" in $$props) $$invalidate(5, size = $$props.size);
+		if ("style" in $$props) $$invalidate(5, style = $$props.style);
+		if ("size" in $$props) $$invalidate(6, size = $$props.size);
 		if ("width" in $$props) $$invalidate(1, width = $$props.width);
 		if ("class" in $$props) $$invalidate(2, _class = $$props.class);
-		if ("$$scope" in $$props) $$invalidate(6, $$scope = $$props.$$scope);
+		if ("disabled" in $$props) $$invalidate(3, disabled = $$props.disabled);
+		if ("$$scope" in $$props) $$invalidate(7, $$scope = $$props.$$scope);
 	};
 
 	$$self.$$.update = () => {
-		if ($$self.$$.dirty & /*style, classes, size*/ 56) {
+		if ($$self.$$.dirty & /*style, classes, size*/ 112) {
 			 {
-				$$invalidate(3, classes = ["uk-button"]);
+				$$invalidate(4, classes = ["uk-button"]);
 
 				if (styles$1.includes(style.toLowerCase())) {
 					classes.push("uk-button-" + style.toLowerCase());
@@ -14096,7 +14103,7 @@ function instance$7($$self, $$props, $$invalidate) {
 					classes.push("uk-button-" + size.toLowerCase());
 				}
 
-				$$invalidate(3, classes = [...classes]);
+				$$invalidate(4, classes = [...classes]);
 			}
 		}
 	};
@@ -14105,17 +14112,18 @@ function instance$7($$self, $$props, $$invalidate) {
 		text,
 		width,
 		_class,
+		disabled,
 		classes,
 		style,
 		size,
 		$$scope,
 		$$slots,
-		click_handler,
+		dblclick_handler,
 		blur_handler,
 		focusin_handler,
 		focusout_handler,
+		click_handler,
 		focus_handler,
-		dblclick_handler,
 		mouseenter_handler,
 		mouseleave_handler,
 		auxclick_handler
@@ -14128,10 +14136,11 @@ class Button extends SvelteComponent {
 
 		init(this, options, instance$7, create_fragment$7, safe_not_equal, {
 			text: 0,
-			style: 4,
-			size: 5,
+			style: 5,
+			size: 6,
 			width: 1,
-			class: 2
+			class: 2,
+			disabled: 3
 		});
 	}
 }
