@@ -13,7 +13,7 @@ export const Main = () => ({
     Component: SectionView,
     props: {
         props: {
-
+            style: select("Style", [...sectionOptions.styles], ""),
         },
     }
 });

@@ -1,9 +1,17 @@
 <script>
     import {Section} from "../../../src";
     export let props = {};
+
+    $: console.log(props)
 </script>
 
-<div {...props}>
-    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
-</div>
+<Section {...props}>
+    <h3>Section Heading Test</h3>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+</Section>
 
