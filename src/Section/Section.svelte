@@ -1,8 +1,10 @@
 <script context="module">
     const styles = ["default", "muted", "primary", "secondary"]
+    const sizes = ["xsmall", "small", "large", "xlarge"]
 
     export const sectionOptions = {
-        styles
+        styles,
+        sizes
     }
 
 </script>
@@ -12,6 +14,7 @@
     let classes = ["uk-section"]
 
     export let style = "";
+    export let size = "";
     $: {
         classes = ["uk-section"]
 
@@ -21,9 +24,12 @@
             classes.push("uk-section-default")
         }
 
+        if(sizes.includes(size.toLowerCase())){
+            classes.push("uk-section-" + size.toLowerCase())
+        }
+
         classes = [...classes]
     }
-    $: console.log(style)
 
     export let width = "";
 

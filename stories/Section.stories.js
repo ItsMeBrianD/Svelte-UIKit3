@@ -14,6 +14,7 @@ export const Main = () => ({
     props: {
         props: {
             style: select("Style", [...sectionOptions.styles], ""),
+            size: select("Size", ["", ...sectionOptions.sizes], ""),
         },
     }
 });
