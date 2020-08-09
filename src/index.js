@@ -41,5 +41,7 @@ export {default as List, listOptions} from "./List/List.svelte";
 
 export {default as Tile, tileOptions} from "./Tile/Tile.svelte";
 
+export {default as Thumbnav} from "./Thumbnav/Thumbnav.svelte";
+
 export {uk_width} from "./helpers/width";
 export {uk_animate} from "./helpers/animation";

@@ -19,4 +19,5 @@
 - [Flex](Flex#flex)
 - [List](List#list)
 - [Tile](Tile#tile)
+- [Thumbnav](Thumbnav#thumbnav)
 - [Width](helpers#width)
