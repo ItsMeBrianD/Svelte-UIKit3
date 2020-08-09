@@ -1,9 +1,16 @@
 <script context="module">
+    import {uk_width} from "..";
 
+    export let meta = [];
+    export let vertical = false;
+    export let width;
 </script>
 
 <script>
+    let classes = ["uk-thumbnav"];
 
 </script>
 
-<h3>Hello, world.</h3>
+<ul class={classes.join(" ")}>
+    <slot/>
+</ul>
