@@ -40,6 +40,7 @@ export {default as Inline} from "./Utility/Inline.svelte";
 export {default as List, listOptions} from "./List/List.svelte";
 
 export {default as ThumbNav} from "./Thumbnav/ThumbNav.svelte";
+export {default as ThumbNavItem} from "./Thumbnav/ThumbNavItem.svelte";
 
 export {default as Tile, tileOptions} from "./Tile/Tile.svelte";
 

@@ -1,10 +1,10 @@
-import ThumbnavView from "./views/Thumbnav/ThumbnavView.svelte";
+import ThumbnavView from "./views/ThumbNav/ThumbnavView.svelte";
 import {thumbnavOptions} from "../src";
 import {withKnobs, text, boolean, number, select} from "@storybook/addon-knobs";
 import {validWidths} from "../src/helpers/width";
 
 export default {
-    title: 'Thumbnav',
+    title: 'ThumbNav',
     component: ThumbnavView,
     decorators: [withKnobs]
 };
@@ -13,7 +13,8 @@ export const Main = () => ({
     Component: ThumbnavView,
     props: {
         props: {
-
+            vertical: boolean("Vertical", false),
+            width: select("Width", ["", ...validWidths], "")
         },
     }
 });
