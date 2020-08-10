@@ -1,10 +1,10 @@
 <script>
-    import {Thumbnav} from "../../../src"
+    import {ThumbNav} from "../../../src"
     export let props = {}
 
 </script>
 
-<ul>
+<ThumbNav>
     <li>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
     </li>
@@ -14,4 +14,4 @@
     <li>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
     </li>
-</ul>
+</ThumbNav>
