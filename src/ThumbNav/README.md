@@ -1,7 +1,7 @@
 # ⚠️ This Section is a WIP ⚠️
 
 
-# Thumbnav
+# ThumbNav
 > [UIKit documentation](https://getuikit.com/docs/thumbnav)
 
 > [Storybook](https://0c370t.github.io/Svelte-UIKit3/docs/?path=/story/Thumbnav--main)
