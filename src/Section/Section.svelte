@@ -15,6 +15,7 @@
 
     export let style = "";
     export let size = "";
+    export let overlap = false;
     $: {
         classes = ["uk-section"]
 
@@ -26,6 +27,10 @@
 
         if(sizes.includes(size.toLowerCase())){
             classes.push("uk-section-" + size.toLowerCase())
+        }
+
+        if (overlap) {
+            classes.push("uk-section-overlap")
         }
 
         classes = [...classes]

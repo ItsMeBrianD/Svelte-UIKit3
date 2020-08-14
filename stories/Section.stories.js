@@ -15,6 +15,7 @@ export const Main = () => ({
         props: {
             style: select("Style", [...sectionOptions.styles], ""),
             size: select("Size", ["", ...sectionOptions.sizes], ""),
+            overlap: boolean("Overlap", false)
         },
     }
 });
