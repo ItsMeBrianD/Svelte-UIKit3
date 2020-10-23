@@ -2,7 +2,7 @@
 
 
 # Flex
-> [UIKit documentation](https://getuikit.com/docs/Flex)
+> [UIKit documentation](https://getuikit.com/docs/flex)
 
 > [Storybook](https://0c370t.github.io/Svelte-UIKit3/docs/?path=/story/Flex--main)
 ## Usage
