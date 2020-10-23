@@ -22,7 +22,7 @@
 > Note that all props are default values
 ```html
 <script>
-    import {Button} from 'uikit-svelte3';
+    import {Button} from 'svelte-uikit3';
 </script>
 
 <Button text={""} style={""} size={""} width={""}/>
