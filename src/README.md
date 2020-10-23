@@ -18,5 +18,6 @@
 - [Dropdown](Dropdown#dropdown)
 - [Flex](Flex#flex)
 - [List](List#list)
+- [ThumbNav](ThumbNav#thumbnav)
 - [Tile](Tile#tile)
 - [Width](helpers#width)

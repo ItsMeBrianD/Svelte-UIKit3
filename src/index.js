@@ -39,6 +39,9 @@ export {default as Inline} from "./Utility/Inline.svelte";
 
 export {default as List, listOptions} from "./List/List.svelte";
 
+export {default as ThumbNav} from "./ThumbNav/ThumbNav.svelte";
+export {default as ThumbNavItem} from "./ThumbNav/ThumbNavItem.svelte";
+
 export {default as Tile, tileOptions} from "./Tile/Tile.svelte";
 
 export {uk_width} from "./helpers/width";
